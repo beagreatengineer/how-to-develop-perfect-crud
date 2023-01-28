@@ -30,7 +30,7 @@
   * PyCharm
   * IDEA
   * Vim, emacs
-* Установлен EditorConfig плагин для твоего редактора
+* Установлен [EditorConfig](https://editorconfig.org/) плагин для твоего редактора
 * Установлены наиболее популярные инструменты по верификации качества кода, например
   * Rubocop for Ruby
   * Pylint/Black/PEP8 for Python
@@ -42,12 +42,9 @@
 * После прогона тестов автоматически считается test coverage
 
 ### Инфраструктура вокруг кода
-Прежде всего: установлены Docker и вocker-compose
-
-
-Далее:
-- Заверни свое приложение в Docker Container ([как это делать правильно](https://cloud.google.com/architecture/best-practices-for-building-containers)
-- Опиши все зависимости своего приложения (PostgreSQL, S3, Redis etc) как Docker контейнеры.
+- Установлены Docker и docker-compose
+- В репозитории есть Dockefile с помощью которого можно собрать приложение в Docker Container ([как это делать правильно](https://cloud.google.com/architecture/best-practices-for-building-containers))
+- Все зависимости приложения (`PostgreSQL`, `S3`, `Redis`, `Kafka`, `RabbitMQ`) описаны в `docker-compose.yml`
 - Настройка приложения и запуск должны делаться максимально просто и прозрачно (желательно в 1 команду)
 #### Конфигурация
 * Настройте application сервер для production сборки приложения:
@@ -126,6 +123,7 @@ API не должно возвращать все поля модели.
 * Возвращаем в ответ ID и содержимое.
 Дополнительно:
 - убедиться что реализованное API идемпотентно: [https://habr.com/ru/company/yandex/blog/442762/](https://habr.com/ru/company/yandex/blog/442762/)
+- Настроить Rate Limiter чтобы защитить БД от спама и мусора
 #### UPDATE (HTTP PUT/PATCH)
 * Разобраться в чем отличие между PUT и PATCH в HTTP
 * Реализовать обновление согласно выбранному методу
