@@ -1,4 +1,6 @@
 # How to develop perfect CRUD
+[<img src="https://img.shields.io/badge/channel-telegram-blue">](https://t.me/careerunderhood) [<img src="https://img.shields.io/badge/message-telegram-blue">](https://t.me/ea_kozlov)
+
 ## Что это?
 Данная статья рассказывает о наборе правил которые полезно знать и применять при разработке бэкэнд приложения. Я написал этот гайд с целью собрать все хорошие практики и опыт в одну статью чтобы можно было использовать ее как чеклист.
 
