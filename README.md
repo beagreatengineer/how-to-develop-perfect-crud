@@ -1,4 +1,37 @@
+
 # How to develop perfect CRUD
+<!-- TOC start -->
+- [How to develop perfect CRUD](#how-to-develop-perfect-crud)
+  * [Что это?](#-)
+    + [Здесь только про Backend? ](#---backend)
+    + [Пригодится ли мне это на работе?](#-----)
+    + [Слишком много всего, это точно нужно?](#------1)
+  * [Советы](#)
+    + [Репозиторий](#-1)
+    + [Инструменты и Code Style](#--code-style)
+    + [Тесты](#-2)
+    + [Инфраструктура вокруг кода](#--)
+      - [Конфигурация](#-3)
+    + [API](#api)
+    + [Распределение логики в коде (MVC)](#----mvc)
+      - [Controller](#controller)
+      - [Model](#model)
+      - [Service](#service)
+      - [View](#view)
+    + [Авторизация и аутентификация](#---1)
+    + [CRUD: Validations](#crud-validations)
+    + [CRUD: Database](#crud-database)
+    + [CRUD: Operations](#crud-operations)
+      - [LIST (HTTP GET)](#list-http-get)
+      - [READ (HTTP GET)](#read-http-get)
+      - [CREATE (HTTP POST)](#create-http-post)
+      - [UPDATE (HTTP PUT/PATCH)](#update-http-putpatch)
+      - [DESTROY (HTTP DELETE)](#destroy-http-delete)
+    + [Взаимодействие с внешними сервисами, трудоемкие операции](#------2)
+    + [Метрики, Логи](#--1)
+    + [WIP: Cache](#wip-cache)
+    + [WIP: Full Text Search](#wip-full-text-search)
+<!-- TOC end -->
 ## Что это?
 Данная статья рассказывает о наборе правил которые полезно знать и применять при разработке бэкэнд приложения. Я написал этот гайд с целью собрать все хорошие практики и опыт в одну статью чтобы можно было использовать ее как чеклист.
 
