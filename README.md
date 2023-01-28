@@ -15,31 +15,30 @@
 
 ## Table of Contents
 <!-- TOC start -->
-- [How to develop perfect CRUD](#how-to-develop-perfect-crud)
-  * [Repository](#repository)
-  * [Code Style](#code-style)
-  * [Tests](#tests)
-  * [Infrastructure around Code](#infrastructure-around-code)
-  * [Configuration](#configuration)
-  * [API](#api)
-  * [MVC Explanation](#mvc-explanation)
+- [Repository](#repository)
+- [Code Style](#code-style)
+- [Tests](#tests)
+- [Infrastructure around Code](#infrastructure-around-code)
+- [Configuration](#configuration)
+- [API Design](#api-design)
+- [Authorization & Authentication](#authorization--authentication)
+- [MVC Explanation](#mvc-explanation)
   * [Controller](#controller)
   * [Model](#model)
   * [Service](#service)
   * [View](#view)
-  * [Authorization & Authentication](#authorization--authentication)
-  * [CRUD: Validations](#crud-validations)
-  * [CRUD: Database](#crud-database)
-  * [CRUD: Operations](#crud-operations)
-    + [LIST (HTTP GET)](#list-http-get)
-    + [READ (HTTP GET)](#read-http-get)
-    + [CREATE (HTTP POST)](#create-http-post)
-    + [UPDATE (HTTP PUT/PATCH)](#update-http-putpatch)
-    + [DESTROY (HTTP DELETE)](#destroy-http-delete)
-  * [External API Calls, Long-running tasks](#external-api-calls-long-running-tasks)
-  * [Logs and Metrics](#logs-and-metrics)
-  * [WIP: Cache](#wip-cache)
-  * [WIP: Full Text Search](#wip-full-text-search)
+- [CRUD: Validations](#crud-validations)
+- [CRUD: Database](#crud-database)
+- [CRUD: Operations](#crud-operations)
+  * [LIST (HTTP GET)](#list-http-get)
+  * [READ (HTTP GET)](#read-http-get)
+  * [CREATE (HTTP POST)](#create-http-post)
+  * [UPDATE (HTTP PUT/PATCH)](#update-http-putpatch)
+  * [DESTROY (HTTP DELETE)](#destroy-http-delete)
+- [External API Calls, Long-running tasks](#external-api-calls-long-running-tasks)
+- [Logs and Metrics](#logs-and-metrics)
+- [WIP: Cache](#wip-cache)
+- [WIP: Full Text Search](#wip-full-text-search)
 <!-- TOC end -->
 ## Repository
 * Код должен храниться в публичном/приватном Git репозитории (Github / Gitlab / Bitbucket)
@@ -82,29 +81,11 @@
    * Undertow for Java
 * При описании конфигурации приложения используйте советы из https://12factor.net
 
-## API
+## API Design
 * API должен быть описан по [REST](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) (если не требуется иначе)
 * Должна быть настроена [Swagger](https://swagger.io/) спецификация которую можно открыть в браузере
 * Формат данных: JSON (если не требуется другого)
 * API должен иметь настроенные таймауты на запросы.
-
-## MVC Explanation
-Цель: разделить обязанности в коде между компонентами: 
-## Controller
-- Принимает тело запроса, валидирует его на соответствие API
-- Проверяет authorization + authentification 
-- Вызывает Service, передает ему данные
-- На основе возвращаемого значения от Service вызывает код формирующий нужный ответ API (через View)
-## Model
-* Хранит только описание схемы данных и связи с другими моделями
-* Бизнес логики хранит по минимуму а лучше не хранит вообще
-* Используется для того чтобы делать запросы к БД на чтение и запись
-## Service
-* Принимает данные от контроллера, валидирует тело, проверяет права доступа (авторизацию, аутентификацию)
-* Использует Model для чтения или записи данных в БД.
-* Отвечает за бизнес-логику приложения
-## View
-* Отвечает за то чтобы на основе данных сформировать API ответ.
 ## Authorization & Authentication
 **Аутентификация** – процедура проверки подлинности, например, проверка подлинности пользователя путем сравнения введенного им пароля с паролем, сохраненным в базе данных.
 
@@ -116,6 +97,24 @@
 
 **Авторизация** – предоставление определенному лицу прав на выполнение определенных действий.
 Например: пользователь которого забанил администратор не может публиковать комменты (хотя он прошел аутентификацию на сайте).
+
+## MVC Explanation
+Цель: разделить обязанности в коде между компонентами: 
+### Controller
+- Принимает тело запроса, валидирует его на соответствие API
+- Проверяет authorization + authentification 
+- Вызывает Service, передает ему данные
+- На основе возвращаемого значения от Service вызывает код формирующий нужный ответ API (через View)
+### Model
+* Хранит только описание схемы данных и связи с другими моделями
+* Бизнес логики хранит по минимуму а лучше не хранит вообще
+* Используется для того чтобы делать запросы к БД на чтение и запись
+### Service
+* Принимает данные от контроллера, валидирует тело, проверяет права доступа (авторизацию, аутентификацию)
+* Использует Model для чтения или записи данных в БД.
+* #Отвечает за бизнес-логику приложения
+### View
+* Отвечает за то чтобы на основе данных сформировать API ответ.
 
 ## CRUD: Validations
 Перед тем как сохранять данные в БД обязательно:
