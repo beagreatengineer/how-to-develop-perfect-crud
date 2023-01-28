@@ -1,5 +1,3 @@
-
-
 # How to develop perfect CRUD
 ## Что это?
 Данная статья рассказывает о наборе правил которые полезно знать и применять при разработке бэкэнд приложения. Я написал этот гайд с целью собрать все хорошие практики и опыт в одну статью чтобы можно было использовать ее как чеклист.
@@ -14,31 +12,32 @@
 Данные советы могут быть полезны не только при разработке тестового задания, но и при разработке новых фич или старте нового приложения с нуля.
 ### Слишком много всего, это точно нужно?
 Чем больше из всего набора фич и практик вы реализуете тем более качественным будет результат. Реализовать все может быть избыточно и потребовать много времени, рассчитайте время и силы.
-## Table Of Contents
+
+## Table of Contents
 <!-- TOC start -->
-  * [Tips](#tips)
-    + [Repository](#repository)
-    + [Code Style](#code-style)
-    + [Tests](#tests)
-    + [Infrastructure around Code](#infrastructure-around-code)
-    + [Configuration](#configuration)
-    + [API](#api)
-    + [MVC Explanation](#mvc-explanation)
-      - [Controller](#controller)
-      - [Model](#model)
-      - [Service](#service)
-      - [View](#view)
-    + [Authorization & Authentication](#authorization--authentication)
-    + [CRUD: Validations](#crud-validations)
-    + [CRUD: Database](#crud-database)
-    + [CRUD: Operations](#crud-operations)
-      - [LIST (HTTP GET)](#list-http-get)
-      - [READ (HTTP GET)](#read-http-get)
-      - [CREATE (HTTP POST)](#create-http-post)
-      - [UPDATE (HTTP PUT/PATCH)](#update-http-putpatch)
-      - [DESTROY (HTTP DELETE)](#destroy-http-delete)
-    + [External API Calls, Long-running tasks](#external-api-calls-long-running-tasks)
-    + [Logs and Metrics](#logs-and-metrics)
+- [How to develop perfect CRUD](#how-to-develop-perfect-crud)
+  * [Repository](#repository)
+  * [Code Style](#code-style)
+  * [Tests](#tests)
+  * [Infrastructure around Code](#infrastructure-around-code)
+  * [Configuration](#configuration)
+  * [API](#api)
+  * [MVC Explanation](#mvc-explanation)
+  * [Controller](#controller)
+  * [Model](#model)
+  * [Service](#service)
+  * [View](#view)
+  * [Authorization & Authentication](#authorization--authentication)
+  * [CRUD: Validations](#crud-validations)
+  * [CRUD: Database](#crud-database)
+  * [CRUD: Operations](#crud-operations)
+    + [LIST (HTTP GET)](#list-http-get)
+    + [READ (HTTP GET)](#read-http-get)
+    + [CREATE (HTTP POST)](#create-http-post)
+    + [UPDATE (HTTP PUT/PATCH)](#update-http-putpatch)
+    + [DESTROY (HTTP DELETE)](#destroy-http-delete)
+  * [External API Calls, Long-running tasks](#external-api-calls-long-running-tasks)
+  * [Logs and Metrics](#logs-and-metrics)
     + [WIP: Cache](#wip-cache)
     + [WIP: Full Text Search](#wip-full-text-search)
 <!-- TOC end -->
