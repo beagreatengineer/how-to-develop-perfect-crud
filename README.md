@@ -1,37 +1,6 @@
 
+
 # How to develop perfect CRUD
-<!-- TOC start -->
-- [How to develop perfect CRUD](#how-to-develop-perfect-crud)
-  * [Что это?](#-)
-    + [Здесь только про Backend? ](#---backend)
-    + [Пригодится ли мне это на работе?](#-----)
-    + [Слишком много всего, это точно нужно?](#------1)
-  * [Советы](#)
-    + [Репозиторий](#-1)
-    + [Инструменты и Code Style](#--code-style)
-    + [Тесты](#-2)
-    + [Инфраструктура вокруг кода](#--)
-      - [Конфигурация](#-3)
-    + [API](#api)
-    + [Распределение логики в коде (MVC)](#----mvc)
-      - [Controller](#controller)
-      - [Model](#model)
-      - [Service](#service)
-      - [View](#view)
-    + [Авторизация и аутентификация](#---1)
-    + [CRUD: Validations](#crud-validations)
-    + [CRUD: Database](#crud-database)
-    + [CRUD: Operations](#crud-operations)
-      - [LIST (HTTP GET)](#list-http-get)
-      - [READ (HTTP GET)](#read-http-get)
-      - [CREATE (HTTP POST)](#create-http-post)
-      - [UPDATE (HTTP PUT/PATCH)](#update-http-putpatch)
-      - [DESTROY (HTTP DELETE)](#destroy-http-delete)
-    + [Взаимодействие с внешними сервисами, трудоемкие операции](#------2)
-    + [Метрики, Логи](#--1)
-    + [WIP: Cache](#wip-cache)
-    + [WIP: Full Text Search](#wip-full-text-search)
-<!-- TOC end -->
 ## Что это?
 Данная статья рассказывает о наборе правил которые полезно знать и применять при разработке бэкэнд приложения. Я написал этот гайд с целью собрать все хорошие практики и опыт в одну статью чтобы можно было использовать ее как чеклист.
 
@@ -45,8 +14,35 @@
 Данные советы могут быть полезны не только при разработке тестового задания, но и при разработке новых фич или старте нового приложения с нуля.
 ### Слишком много всего, это точно нужно?
 Чем больше из всего набора фич и практик вы реализуете тем более качественным будет результат. Реализовать все может быть избыточно и потребовать много времени, рассчитайте время и силы.
-## Советы
-### Репозиторий
+## Table Of Contents
+<!-- TOC start -->
+  * [Tips](#tips)
+    + [Repository](#repository)
+    + [Code Style](#code-style)
+    + [Tests](#tests)
+    + [Infrastructure around Code](#infrastructure-around-code)
+    + [Configuration](#configuration)
+    + [API](#api)
+    + [MVC Explanation](#mvc-explanation)
+      - [Controller](#controller)
+      - [Model](#model)
+      - [Service](#service)
+      - [View](#view)
+    + [Authorization & Authentication](#authorization--authentication)
+    + [CRUD: Validations](#crud-validations)
+    + [CRUD: Database](#crud-database)
+    + [CRUD: Operations](#crud-operations)
+      - [LIST (HTTP GET)](#list-http-get)
+      - [READ (HTTP GET)](#read-http-get)
+      - [CREATE (HTTP POST)](#create-http-post)
+      - [UPDATE (HTTP PUT/PATCH)](#update-http-putpatch)
+      - [DESTROY (HTTP DELETE)](#destroy-http-delete)
+    + [External API Calls, Long-running tasks](#external-api-calls-long-running-tasks)
+    + [Logs and Metrics](#logs-and-metrics)
+    + [WIP: Cache](#wip-cache)
+    + [WIP: Full Text Search](#wip-full-text-search)
+<!-- TOC end -->
+## Repository
 * Код должен храниться в публичном/приватном Git репозитории (Github / Gitlab / Bitbucket)
 * README должен содержать информацию о проекте, инструменты и технологии, инструкцию по настройке и запуску приложения
 * Должен быть настроен Continuous Integration (Gitlab CI / Github Actions)
@@ -55,7 +51,7 @@
 * Будет огромным плюсом если будет настроен Continuous Delivery - деплой приложения на сервер
 * Осмысленная история коммитов + использование feature branches, pull requests
 * Необязательно: настроенный [dependabot](https://docs.github.com/ru/code-security/dependabot/working-with-dependabot)
-### Инструменты и Code Style
+## Code Style
 Перед разработкой приложения:
 * Настроен редактор или IDE:
   * VS Code
@@ -67,49 +63,50 @@
 * Установлены наиболее популярные инструменты по верификации качества кода, например
   * Rubocop for Ruby
   * Pylint/Black/PEP8 for Python
-### Тесты
+## Tests
 * Установлены библиотеки для написания тестов различных видов (unit, integration). Например:
    * Pytest for Python
    * RSpec for Ruby
    * Testify, testcontainers for Golang
 * После прогона тестов автоматически считается test coverage
 
-### Инфраструктура вокруг кода
+## Infrastructure around Code
 - Установлены Docker и docker-compose
 - В репозитории есть Dockefile с помощью которого можно собрать приложение в Docker Container ([как это делать правильно](https://cloud.google.com/architecture/best-practices-for-building-containers))
 - Все зависимости приложения (`PostgreSQL`, `S3`, `Redis`, `Kafka`, `RabbitMQ`) описаны в `docker-compose.yml`
 - Настройка приложения и запуск должны делаться максимально просто и прозрачно (желательно в 1 команду)
-#### Конфигурация
-* Настройте application сервер для production сборки приложения:
+## Configuration
+* Приложение должно иметь несколько окружений (development, prod, test)
+* Настроен application сервер для production сборки приложения:
    * Puma for Ruby
    * Gunicorn3 for Python
    * Undertow for Java
 * При описании конфигурации приложения используйте советы из https://12factor.net
 
-### API
+## API
 * API должен быть описан по [REST](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) (если не требуется иначе)
 * Должна быть настроена [Swagger](https://swagger.io/) спецификация которую можно открыть в браузере
 * Формат данных: JSON (если не требуется другого)
 * API должен иметь настроенные таймауты на запросы.
 
-### Распределение логики в коде (MVC)
+## MVC Explanation
 Цель: разделить обязанности в коде между компонентами: 
-#### Controller
+## Controller
 - Принимает тело запроса, валидирует его на соответствие API
 - Проверяет authorization + authentification 
 - Вызывает Service, передает ему данные
 - На основе возвращаемого значения от Service вызывает код формирующий нужный ответ API (через View)
-#### Model
+## Model
 * Хранит только описание схемы данных и связи с другими моделями
 * Бизнес логики хранит по минимуму а лучше не хранит вообще
 * Используется для того чтобы делать запросы к БД на чтение и запись
-#### Service
+## Service
 * Принимает данные от контроллера, валидирует тело, проверяет права доступа (авторизацию, аутентификацию)
 * Использует Model для чтения или записи данных в БД.
 * Отвечает за бизнес-логику приложения
-#### View
+## View
 * Отвечает за то чтобы на основе данных сформировать API ответ.
-### Авторизация и аутентификация
+## Authorization & Authentication
 **Аутентификация** – процедура проверки подлинности, например, проверка подлинности пользователя путем сравнения введенного им пароля с паролем, сохраненным в базе данных.
 
 В качестве аутентификации по API можно использовать:
@@ -121,11 +118,11 @@
 **Авторизация** – предоставление определенному лицу прав на выполнение определенных действий.
 Например: пользователь которого забанил администратор не может публиковать комменты (хотя он прошел аутентификацию на сайте).
 
-### CRUD: Validations
+## CRUD: Validations
 Перед тем как сохранять данные в БД обязательно:
 - отвалидируйте данные на тип (там где ожидается строка пришла строка, где int там int итп)
 - и соответствие тела запроса API (если пользователь отправил поля которые не имеет права отпралять в БД мы должны их игнорировать)
-### CRUD: Database
+## CRUD: Database
 * Всегда используйте ORM (это проще и безопаснее) если в задании не указано что нужно писать чистый SQL
 * Используйте механизм миграций чтобы создавать таблицы и другие сущности в вашей БД (Rails Migrations, Flask-Migrate, etc)
 * При описании таблиц важно сразу указать всем столбцам необходимые constraints (NULLABLE, DEFAULT VALUE, UNIQUE, PRIMARY KEY)
@@ -134,8 +131,8 @@
 
 
 P.S. При описании миграций полезно подсматривать [сюда](https://github.com/ankane/strong_migrations), чтобы не написать миграцию которая может заблокировать БД.
-### CRUD: Operations
-#### LIST (HTTP GET)
+## CRUD: Operations
+### LIST (HTTP GET)
 * Для каждого ресурса в ответе должно присутствовать ID.
 * Ресурсы должны быть отсортированными по какому либо признаку, например по времени создания.
 * API должен поддерживать пагинацию (чтобы не возвращать все сущности из БД за раз) [Разбор вариантов пагинации](https://dev.to/appwrite/this-is-why-you-should-use-cursor-pagination-4nh5)
@@ -150,9 +147,9 @@ API не должно возвращать все поля модели.
 
 Полный текст поста для этого эндпоинта не нужен.
 
-#### READ (HTTP GET)
+### READ (HTTP GET)
 * Возвращаем полностью ресурс со всеми полями, ничего особенного
-#### CREATE (HTTP POST)
+### CREATE (HTTP POST)
 * Валидируем данные на предмет полей которые пользователь не имеет права изменять в БД а следовательно передавать.
 * Делаем в БД INSERT
 * Возвращаем в ответ ID и содержимое.
@@ -160,24 +157,24 @@ API не должно возвращать все поля модели.
 Задачи со звездочкой:
 - Убедиться что реализованное API идемпотентно: [Подробнее](https://habr.com/ru/company/yandex/blog/442762/)
 - Настроить Rate Limiter чтобы защитить БД от спама и мусора
-#### UPDATE (HTTP PUT/PATCH)
+### UPDATE (HTTP PUT/PATCH)
 * Разобраться в чем отличие между PUT и PATCH в HTTP
 * Реализовать обновление согласно выбранному методу
 * Валидировать тело запроса на предмет полей которые пользователь не имеет права изменять в БД а следовательно передавать.
 * Проверка права на редактирование у пользователя
   * Например API не должно позволять пользователю редактировать чужие комментарии :)
 
-#### DESTROY (HTTP DELETE)
+### DESTROY (HTTP DELETE)
 * Реализовать удаление предварительно проверив наличие сущности в БД и права на удаление у пользователя
 Дополнительно: реализовать soft удаление (скрываем от пользователя, оставляем в БД)
-### Взаимодействие с внешними сервисами, трудоемкие операции
+## External API Calls, Long-running tasks
 Если требуется в рамках API выполнять запросы к внешним системам или генерировать отчеты/выполнять долгие запросы к БД то стоит подумать о том чтобы делать эти операции за пределами HTTP запроса. Для этого может понадобиться очередь, например:
 * Celery for Python
 * Sidekiq for Ruby
 
-### Метрики, Логи
+## Logs and Metrics
 - Настроить Prometheus Collector и HTTP handler через который можно просмотреть состояние метрик.
-
+- Логи по хорошему должны писаться только в stdout
 ### WIP: Cache
 ### WIP: Full Text Search
 
