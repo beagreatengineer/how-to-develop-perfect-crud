@@ -99,6 +99,7 @@
 
 ## MVC Explanation
 Цель: разделить обязанности в коде между компонентами: 
+<img src="https://harbinger-systems.com/blog/wp-content/uploads/2015/08/MVC-Architecture-With-Service-Layer1-1024x477.png">
 ### Controller
 - Принимает тело запроса, валидирует его на соответствие API
 - Проверяет authorization + authentification 
