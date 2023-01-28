@@ -38,8 +38,8 @@
     + [DESTROY (HTTP DELETE)](#destroy-http-delete)
   * [External API Calls, Long-running tasks](#external-api-calls-long-running-tasks)
   * [Logs and Metrics](#logs-and-metrics)
-    + [WIP: Cache](#wip-cache)
-    + [WIP: Full Text Search](#wip-full-text-search)
+  * [WIP: Cache](#wip-cache)
+  * [WIP: Full Text Search](#wip-full-text-search)
 <!-- TOC end -->
 ## Repository
 * Код должен храниться в публичном/приватном Git репозитории (Github / Gitlab / Bitbucket)
@@ -174,6 +174,6 @@ API не должно возвращать все поля модели.
 ## Logs and Metrics
 - Настроить Prometheus Collector и HTTP handler через который можно просмотреть состояние метрик.
 - Логи по хорошему должны писаться только в stdout
-### WIP: Cache
-### WIP: Full Text Search
+## WIP: Cache
+## WIP: Full Text Search
 
