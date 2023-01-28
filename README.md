@@ -73,7 +73,7 @@
 - Все зависимости приложения (`PostgreSQL`, `S3`, `Redis`, `Kafka`, `RabbitMQ`) описаны в `docker-compose.yml`
 - Настройка приложения и запуск должны делаться максимально просто и прозрачно (желательно в 1 команду)
 ## Configuration
-* Приложение должно иметь несколько окружений (development, prod, test)
+* [Приложение должно иметь несколько окружений (development, prod, test)](https://12factor.net/dev-prod-parity)
 * Настроен application сервер для production сборки приложения:
    * Puma for Ruby
    * Gunicorn3 for Python
