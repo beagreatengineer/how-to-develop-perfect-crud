@@ -174,7 +174,7 @@ API не должно возвращать все поля модели.
 
 ## Logs and Metrics
 - Настроить Prometheus Collector и HTTP handler через который можно просмотреть состояние метрик.
-- Логи по хорошему должны писаться только в stdout
+- [Логи должны писаться только в stdout](https://12factor.net/logs)
 ## WIP: Cache
 ## WIP: Full Text Search
 
