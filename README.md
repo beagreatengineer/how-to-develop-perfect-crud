@@ -46,7 +46,8 @@
   * Интегрируй прогон тестов  в CI для каждой фича ветки и мастер ветки
   * Интегрируй прогон линтера в CI для каждой фича ветки и мастер ветки.
 * Будет огромным плюсом если будет настроен Continuous Delivery - деплой приложения на сервер
-* Осмысленная история коммитов + использование feature branches, pull requests
+* Осмысленная история коммитов. Можно использовать практику [Conventional commits](https://www.conventionalcommits.org/ru/v1.0.0/)
+* Используйте feature branches, pull requests
 * Необязательно: настроенный [dependabot](https://docs.github.com/ru/code-security/dependabot/working-with-dependabot)
 ## Code Style
 Перед разработкой приложения:
@@ -66,12 +67,15 @@
    * RSpec for Ruby
    * Testify, testcontainers for Golang
 * После прогона тестов автоматически считается test coverage
+* Старайтесь покрывать ваш код по [пирамиде тестирования](https://martinfowler.com/articles/practical-test-pyramid.html), так чтобы было больше всего было unit-тестов, меньше интеграционных тестов и при необходимости были end-to-end тесты. Обратите внимание, что для тестов разного уровня могут использоваться разные инструменты. Для end to end тестирования можно использовать [Selenium](https://www.selenium.dev/) или [Cypress](https://www.cypress.io/how-it-works/). Для интеграционных удобно использовать `testcontainers`
+* Пишите unit-тесты по паттерну [AAA (Arange Act Assert)](https://medium.com/@pjbgf/title-testing-code-ocd-and-the-aaa-pattern-df453975ab80)
 
 ## Infrastructure around Code
 - Установлены Docker и docker-compose
 - В репозитории есть Dockefile с помощью которого можно собрать приложение в Docker Container ([как это делать правильно](https://cloud.google.com/architecture/best-practices-for-building-containers))
 - Все зависимости приложения (`PostgreSQL`, `S3`, `Redis`, `Kafka`, `RabbitMQ`) описаны в `docker-compose.yml`
 - Настройка приложения и запуск должны делаться максимально просто и прозрачно (желательно в 1 команду)
+
 ## Configuration
 * [Приложение должно иметь несколько окружений (development, prod, test)](https://12factor.net/dev-prod-parity)
 * Настроен application сервер для production сборки приложения:
@@ -173,8 +177,13 @@ API не должно возвращать все поля модели.
 * Sidekiq for Ruby
 
 ## Logs and Metrics
-- Настроить Prometheus Collector и HTTP handler через который можно просмотреть состояние метрик.
+- Настроить Prometheus метрики с информацией о состоянии HTTP API и райнтайме приложения. Рекомендуется использовать готовые пакеты, которые собирают метрики о работе приложения по методикам [RED (Rate Error Duration)](https://www.infoworld.com/article/3638693/the-red-method-a-new-strategy-for-monitoring-microservices.html) и [USE (Utilization Saturation Errors)](https://www.brendangregg.com/usemethod.html):
+  - [prometheus, promauto, promhttp для Go](https://prometheus.io/docs/guides/go-application/)
+  - [starlette-prometheus для Python](https://github.com/perdy/starlette-prometheus)
 - [Логи должны писаться только в stdout](https://12factor.net/logs)
+
+## WIP: Security
+
 ## WIP: Cache
 ## WIP: Full Text Search
 
