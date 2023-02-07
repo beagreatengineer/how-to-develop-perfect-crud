@@ -44,6 +44,7 @@
 <!-- TOC end -->
 ## Repository
 * Код должен храниться в публичном/приватном Git репозитории (Github / Gitlab / Bitbucket)
+* В Git-репозитории должен быть запрещен push с флагом `--force` в основные ветки (master, main, релизные ветки).
 * README должен содержать информацию о проекте, инструменты и технологии, инструкцию по настройке и запуску приложения
 * Читаемая история коммитов. Можно использовать практику [Conventional commits](https://www.conventionalcommits.org/ru/v1.0.0/)
 * Используйте feature branches, pull requests
