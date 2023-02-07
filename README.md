@@ -89,8 +89,10 @@
 
 ## API Design
 * Используй семантику [REST](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) как фундамент при описании API 
-* Должна быть настроена [Swagger](https://swagger.io/) спецификация которую можно открыть в браузере
 * Формат данных: JSON (если не требуется другого)
+* В репозитории есть возможность открыть [Swagger](https://swagger.io/) спецификацию для знакомства с API
+  * Её можно написать самостоятельно
+  * А можно генерировать c помощью утилит: [Rails (Ruby)](https://github.com/rswag/rswag), [Flask (Python)](https://github.com/thomaxxl/safrs), [Echo (Golang)](https://github.com/swaggo/echo-swagger)
 
 Если считаешь что связка REST+JSON не подходит под задачу, или по заданию требуется другой формат, то стоит изучить альтернативы:
 - gRPC
@@ -108,7 +110,7 @@
 
 Примеры библиотек:
 - [Pundit for Ruby](https://github.com/varvet/pundit)
-- [Casbin](https://github.com/casbin/casbin)
+- [Casbin (Many languages supported)](https://github.com/casbin/casbin)
 
 ## MVC Explanation
 Цель: разделить обязанности в коде между компонентами: 
@@ -198,8 +200,9 @@ API не должно возвращать все поля модели.
   - [starlette-prometheus для Python](https://github.com/perdy/starlette-prometheus)
 - [Логи должны писаться только в stdout](https://12factor.net/logs)
 
-## WIP: Security
 
+## WIP: Transactions, Locks, Isolation Levels, ACID
+## WIP: Security
 ## WIP: Cache
 ## WIP: Full Text Search
 
