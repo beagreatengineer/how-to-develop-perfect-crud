@@ -39,6 +39,7 @@
   * [DESTROY (HTTP DELETE)](#destroy-http-delete)
 - [External API Calls, Long-running tasks](#external-api-calls-long-running-tasks)
 - [Logs and Metrics](#logs-and-metrics)
+- [🛡️Security](#%EF%B8%8Fsecurity)
 - [WIP: Cache](#wip-cache)
 - [WIP: Full Text Search](#wip-full-text-search)
 <!-- TOC end -->
@@ -205,8 +206,13 @@ API не должно возвращать все поля модели.
 - [Логи должны писаться только в stdout](https://12factor.net/logs)
 
 
+## 🛡️Security
+- Убедись, что не используешь версии библиотек в которых есть уязвимости, проверять это можно автоматически с помощью утилит, например:
+  - [bundler-audit for Ruby](https://github.com/rubysec/bundler-audit)
+  - [pip-audit for Python](https://pypi.org/project/pip-audit/)
+- Настрой dependabot, который будет автоматически обновлять версии библиотек
+- Убедись, что приложение достаточно защищено от актуальных уязвимостей - [OWASP TOP 10](https://owasp.org/www-project-top-ten/). Помочь в этом нелегком деле может [чеклист №1](https://github.com/shieldfy/API-Security-Checklist) и  [№2 (с примерами на Ruby on Rails)](https://github.com/brunofacca/zen-rails-security-checklist)
 ## WIP: Transactions, Locks, Isolation Levels, ACID
-## WIP: Security
 ## WIP: Cache
 ## WIP: Full Text Search
 
