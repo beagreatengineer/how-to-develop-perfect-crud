@@ -29,6 +29,7 @@
   * [Model](#model)
   * [Service](#service)
   * [View](#view)
+  * [Additional](#additional)
 - [CRUD: Validations](#crud-validations)
 - [CRUD: Database](#crud-database)
 - [CRUD: Operations](#crud-operations)
@@ -54,8 +55,8 @@
   * запуск тестов
   * запуск линтера
 * Будет огромным плюсом если настроен Continuous Delivery - деплой приложения в одно или несколько окружений. (test/stage/prod)
-
 * Необязательно: настроенный [dependabot](https://docs.github.com/ru/code-security/dependabot/working-with-dependabot)
+
 ## Code Style
 Перед разработкой приложения:
 * Настроен редактор или IDE:
@@ -143,9 +144,11 @@
 
 Бесплатные ресурсы, которые рекомендую для старта:
 - [Categorized overview of programming principles & design patterns](https://github.com/webpro/programming-principles)
-- [Refactoring.guru](https://www.oreilly.com/library/view/head-first-design/0596007124/)
-- [Summary of 'Clean code' by Robert C. Martin](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29)
+- [Refactoring Patterns and Design Patters Reference](https://www.oreilly.com/library/view/head-first-design/0596007124/)
+- [Summary of "Clean code" by Robert C. Martin](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29)
+- [Summary of "Clean Architecture" by Robert C. Martin](https://gist.github.com/ygrenzinger/14812a56b9221c9feca0b3621518635b)
 
+## CRUD: Validations
 Перед тем как сохранять данные в БД обязательно:
 - отвалидируйте данные на тип (там где ожидается строка пришла строка, где int там int итп)
 - и соответствие тела запроса API (если пользователь отправил поля которые не имеет права отпралять в БД мы должны их игнорировать)
@@ -201,12 +204,13 @@ API не должно возвращать все поля модели.
 Если в рамках API требуется
 - выполнять запросы к внешним системам
 - генерировать отчеты/выполнять долгие запросы к БД 
-
-стоит подумать о том чтобы делать эти операции за пределами HTTP запроса. Если коротко: чем дольше запросы к вашему API тем меньше клиентов сможет обслужить сервер в единицу времени. Подробнее: [Latency, throughput, and availability: system design interview concepts](https://igotanoffer.com/blogs/tech/latency-throughput-availability-system-design-interview)
+то стоит подумать о том чтобы делать эти операции за пределами HTTP запроса. 
 
 Для этого может понадобиться очередь, например:
 * Celery for Python
 * Sidekiq for Ruby
+
+Подробнее о том почему важно чтоб HTTP запросы были быстрыми: [Latency, throughput, and availability: system design interview concepts](https://igotanoffer.com/blogs/tech/latency-throughput-availability-system-design-interview)
 
 ## Logs and Metrics
 - Настроить Prometheus метрики с информацией о состоянии HTTP API и райнтайме приложения. Рекомендуется использовать готовые пакеты, которые собирают метрики о работе приложения по методикам [RED (Rate Error Duration)](https://www.infoworld.com/article/3638693/the-red-method-a-new-strategy-for-monitoring-microservices.html) и [USE (Utilization Saturation Errors)](https://www.brendangregg.com/usemethod.html):
