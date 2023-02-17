@@ -29,6 +29,7 @@
   * [Model](#model)
   * [Service](#service)
   * [View](#view)
+- [📐✏️👷‍♀️Architecture, Design Patterns, Refactoring, etc](#%EF%B8%8F%EF%B8%8Farchitecture-design-patterns-refactoring-etc)
 - [CRUD: Validations](#crud-validations)
 - [CRUD: Database](#crud-database)
 - [CRUD: Operations](#crud-operations)
