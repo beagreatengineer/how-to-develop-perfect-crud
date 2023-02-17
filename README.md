@@ -144,6 +144,8 @@
 Бесплатные ресурсы, которые рекомендую для старта:
 - [Categorized overview of programming principles & design patterns](https://github.com/webpro/programming-principles)
 - [Refactoring.guru](https://www.oreilly.com/library/view/head-first-design/0596007124/)
+- [Summary of 'Clean code' by Robert C. Martin](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29)
+
 Перед тем как сохранять данные в БД обязательно:
 - отвалидируйте данные на тип (там где ожидается строка пришла строка, где int там int итп)
 - и соответствие тела запроса API (если пользователь отправил поля которые не имеет права отпралять в БД мы должны их игнорировать)
