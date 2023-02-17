@@ -210,7 +210,7 @@ API не должно возвращать все поля модели.
 * Celery for Python
 * Sidekiq for Ruby
 
-Подробнее о том почему важно чтоб HTTP запросы были быстрыми: [Latency, throughput, and availability: system design interview concepts](https://igotanoffer.com/blogs/tech/latency-throughput-availability-system-design-interview)
+Подробнее о том, почему так важно чтобы HTTP запросы были быстрыми: [Latency, throughput, and availability: system design interview concepts](https://igotanoffer.com/blogs/tech/latency-throughput-availability-system-design-interview)
 
 ## Logs and Metrics
 - Настроить Prometheus метрики с информацией о состоянии HTTP API и райнтайме приложения. Рекомендуется использовать готовые пакеты, которые собирают метрики о работе приложения по методикам [RED (Rate Error Duration)](https://www.infoworld.com/article/3638693/the-red-method-a-new-strategy-for-monitoring-microservices.html) и [USE (Utilization Saturation Errors)](https://www.brendangregg.com/usemethod.html):
