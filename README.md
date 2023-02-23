@@ -46,13 +46,16 @@
 <!-- TOC end -->
 ## Repository
 * Код должен храниться в публичном/приватном Git репозитории (Github / Gitlab / Bitbucket)
-* В Git-репозитории должен быть запрещен push с флагом `--force` в основные ветки (master, main, релизные ветки).
-* README должен содержать информацию о проекте, инструменты и технологии, инструкцию по настройке и запуску приложения
+* В Git-репозитории должен быть запрещен push с флагом `--force` в основные ветки (`master`, `main`, релизные ветки).
+* `README` должен содержать:
+  - информацию о проекте
+  - краткую справку об инструментах и технологиях
+  - инструкцию по настройке и запуску приложения
+* Используйте feature branches, pull requests. Отличная [статья](https://www.flagship.io/git-branching-strategies/) в которой сравниваютcя Git Branching Strategies. 
 * Читаемая история коммитов. Можно использовать практику [Conventional commits](https://www.conventionalcommits.org/ru/v1.0.0/)
-* Используйте feature branches, pull requests
 * Должен быть настроен Continuous Integration (Gitlab CI / Github Actions)
-* Для каждой feature ветки и master ветки должен быть настроен:
-  * запуск тестов
+* Для `feature/`  и `master` branches должен быть настроен:
+  * запуск тестов + подсчёт [coverage](https://www.guru99.com/test-coverage-in-software-testing.html)
   * запуск линтера
 * Будет огромным плюсом если настроен Continuous Delivery - деплой приложения в одно или несколько окружений. (test/stage/prod)
 * Необязательно: настроенный [dependabot](https://docs.github.com/ru/code-security/dependabot/working-with-dependabot)
