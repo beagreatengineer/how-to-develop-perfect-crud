@@ -19,18 +19,18 @@
 <!-- TOC start -->
 - [Repository](#repository)
 - [Code Style](#code-style)
-- [Tests](#tests)
+- [✔️Tests](#%EF%B8%8Ftests)
 - [Infrastructure around Code](#infrastructure-around-code)
-- [Configuration](#configuration)
+- [⚙️Configuration](#%EF%B8%8Fconfiguration)
 - [API Design](#api-design)
-- [Authorization & Authentication](#authorization--authentication)
+- [Authorization & Authentification](#authorization--authentification)
 - [MVC Explanation](#mvc-explanation)
   * [Controller](#controller)
   * [Model](#model)
   * [Service](#service)
   * [View](#view)
 - [📐✏️👷‍♀️Architecture, Design Patterns, Refactoring, etc](#%EF%B8%8F%EF%B8%8Farchitecture-design-patterns-refactoring-etc)
-- [CRUD: Validations](#crud-validations)
+- [🔒CRUD: Validations](#crud-validations)
 - [CRUD: Database](#crud-database)
 - [CRUD: Operations](#crud-operations)
   * [LIST (HTTP GET)](#list-http-get)
@@ -39,7 +39,7 @@
   * [UPDATE (HTTP PUT/PATCH)](#update-http-putpatch)
   * [DESTROY (HTTP DELETE)](#destroy-http-delete)
 - [External API Calls, Long-running tasks](#external-api-calls-long-running-tasks)
-- [Logs and Metrics](#logs-and-metrics)
+- [📈Logs and Metrics](#logs-and-metrics)
 - [🛡️Security](#%EF%B8%8Fsecurity)
 - [WIP: Cache](#wip-cache)
 - [WIP: Full Text Search](#wip-full-text-search)
@@ -72,7 +72,7 @@
 * Установлены наиболее популярные инструменты по верификации качества кода, например
   * Rubocop for Ruby
   * Pylint/Black/PEP8 for Python
-## Tests
+## ✔️Tests
 * Установлены библиотеки для написания тестов различных видов (unit, integration). Например:
    * Pytest for Python
    * RSpec for Ruby
@@ -88,7 +88,7 @@
 - Все зависимости приложения (`PostgreSQL`, `S3`, `Redis`, `Kafka`, `RabbitMQ`) описаны в `docker-compose.yml`
 - Настройка приложения и запуск должны делаться максимально просто и прозрачно (1-2 команды)
 
-## Configuration
+## ⚙️Configuration
 * [Приложение должно иметь несколько окружений (development, prod, test)](https://12factor.net/dev-prod-parity)
 * Настроен application сервер для production сборки приложения:
    * Puma for Ruby
@@ -151,7 +151,7 @@
 - [Summary of "Clean code" by Robert C. Martin](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29)
 - [Summary of "Clean Architecture" by Robert C. Martin](https://gist.github.com/ygrenzinger/14812a56b9221c9feca0b3621518635b)
 
-## CRUD: Validations
+## 🔒CRUD: Validations
 Перед тем как сохранять данные в БД обязательно:
 - отвалидируйте данные на тип (там где ожидается строка пришла строка, где int там int итп)
 - и соответствие тела запроса API (если пользователь отправил поля которые не имеет права отпралять в БД мы должны их игнорировать)
@@ -215,7 +215,7 @@ API не должно возвращать все поля модели.
 
 Подробнее о том, почему так важно чтобы HTTP запросы были быстрыми: [Latency, throughput, and availability: system design interview concepts](https://igotanoffer.com/blogs/tech/latency-throughput-availability-system-design-interview)
 
-## Logs and Metrics
+## 📈Logs and Metrics
 - Настроить Prometheus метрики с информацией о состоянии HTTP API и райнтайме приложения. Рекомендуется использовать готовые пакеты, которые собирают метрики о работе приложения по методикам [RED (Rate Error Duration)](https://www.infoworld.com/article/3638693/the-red-method-a-new-strategy-for-monitoring-microservices.html) и [USE (Utilization Saturation Errors)](https://www.brendangregg.com/usemethod.html):
   - [prometheus, promauto, promhttp для Go](https://prometheus.io/docs/guides/go-application/)
   - [starlette-prometheus для Python](https://github.com/perdy/starlette-prometheus)
