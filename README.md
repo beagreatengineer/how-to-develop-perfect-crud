@@ -37,7 +37,7 @@
   * [CREATE (HTTP POST)](#create-http-post)
   * [UPDATE (HTTP PUT/PATCH)](#update-http-putpatch)
   * [DESTROY (HTTP DELETE)](#destroy-http-delete)
-- [External API Calls, Long-running tasks](#external-api-calls-long-running-tasks)
+- [External API Calls, Long-running tasks (And why we need message queue)](#external-api-calls-long-running-tasks-and-why-we-need-message-queue)
 - [📈Logs and Metrics](#logs-and-metrics)
 - [🛡️Security](#%EF%B8%8Fsecurity)
 - [WIP: Cache](#wip-cache)
@@ -205,8 +205,8 @@ API не должно возвращать все поля модели.
 * Реализовать удаление предварительно проверив наличие сущности в БД и права на удаление у пользователя
 
 Дополнительно может быть полезно: реализовать soft удаление (скрываем от пользователя, оставляем в БД)
-## External API Calls, Long-running tasks
-Если в рамках API требуется
+## External API Calls, Long-running tasks (And why we need message queue)
+Если в рамках API требуется:
 - выполнять запросы к внешним системам
 - генерировать отчеты/выполнять долгие запросы к БД 
 то стоит подумать о том чтобы делать эти операции за пределами HTTP запроса. 
