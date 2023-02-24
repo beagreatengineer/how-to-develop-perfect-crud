@@ -83,13 +83,12 @@
 Старайтесь покрывать ваш код по [пирамиде тестирования](https://martinfowler.com/articles/practical-test-pyramid.html). Обратите внимание, что для тестов разного уровня могут использоваться разные инструменты. Для end to end тестирования можно использовать [Selenium](https://www.selenium.dev/) или [Cypress](https://www.cypress.io/how-it-works/). Для интеграционных удобно использовать `testcontainers`
 
 ## ⚙️Configuration & Infrastructure around Code
-- На локальной машине разработчика установлены `Docker` и `docker-compose`
-- В репозитории есть Dockefile с помощью которого можно собрать приложение в `Docker container`
-  - [Best practices when writing a Dockerfile for a Ruby application](https://lipanski.com/posts/dockerfile-ruby-best-practices) (хотя советы применимы и к другим языкам)
-  - [Google Cloud: Best practices for building containers](https://cloud.google.com/architecture/best-practices-for-building-containers)
-
-- Все зависимости приложения (`PostgreSQL`, `S3`, `Redis`, `Kafka`, `RabbitMQ`) описаны в `docker-compose.yml`
-- Настройка приложения и запуск должны делаться максимально просто и прозрачно (для этого может понадобиться написать вспомогательные скрипты на `bash/zsh/powershell`)
+* На локальной машине разработчика установлены `Docker` и `docker-compose`
+* В репозитории есть Dockefile с помощью которого можно собрать приложение в `Docker container`
+  * [Best practices when writing a Dockerfile for a Ruby application](https://lipanski.com/posts/dockerfile-ruby-best-practices) (хотя советы применимы и к другим языкам)
+  * [Google Cloud: Best practices for building containers](https://cloud.google.com/architecture/best-practices-for-building-containers)
+* Все зависимости приложения (`PostgreSQL`, `S3`, `Redis`, `Kafka`, `RabbitMQ`) описаны в `docker-compose.yml`
+* Настройка приложения и запуск должны делаться максимально просто и прозрачно (для этого может понадобиться написать вспомогательные скрипты на `bash/zsh/powershell`)
 * [Приложение должно иметь несколько окружений (development, prod, test)](https://12factor.net/dev-prod-parity)
 * Для `production` сборки приложения используется рекомендуемый application сервер, например:
    * Puma for Ruby
