@@ -99,15 +99,16 @@
 
 
 ## API Design
-* Используй семантику [REST](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) как фундамент при описании API 
+* Используй конвенции [REST](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) как фундамент при именовании путей, типов операций и выборе статусов ответов API 
 * Формат данных: JSON (если не требуется другого)
 * В репозитории есть возможность открыть [Swagger](https://swagger.io/) спецификацию для знакомства с API
   * Её можно написать самостоятельно
   * А можно генерировать c помощью утилит: [rswag (Rails)](https://github.com/rswag/rswag), [safrs (Flask)](https://github.com/thomaxxl/safrs), [echo-swagger (Echo/Golang)](https://github.com/swaggo/echo-swagger)
 
 Если считаешь что связка REST+JSON не подходит под задачу, или по заданию требуется другой формат, то стоит изучить альтернативы:
-- gRPC
-- GraphQL
+- [SOAP](https://www.w3.org/TR/soap12-part1/)
+- [gRPC](https://grpc.io/)
+- [GraphQL](https://graphql.org/)
 
 ## Authorization & Authentification
 **Аутентификация** – процедура проверки подлинности, например, проверка подлинности пользователя путем сравнения введенного им пароля с паролем, сохраненным в базе данных.
@@ -238,6 +239,16 @@ API не должно возвращать все поля модели.
   - [pip-audit for Python](https://pypi.org/project/pip-audit/)
 - Настрой dependabot, который будет автоматически обновлять версии библиотек
 - Убедись, что приложение достаточно защищено от актуальных уязвимостей - [OWASP TOP 10](https://owasp.org/www-project-top-ten/). Помочь в этом нелегком деле может [чеклист №1](https://github.com/shieldfy/API-Security-Checklist) и  [№2 (с примерами на Ruby on Rails)](https://github.com/brunofacca/zen-rails-security-checklist)
+
+## CORS заголовки (Cross-Origin Resource Sharing)
+Если запросы к твоему API будут делать из браузерных скриптов, например Single Page Aplication, построенных на современных Javascript фреймворках (React, Angular, Vue.js) и домен API будет отличаться от домена клиентского приложения, то нужно в API добавить CORS заголовки, чтобы браузер не блокировал ответы от API.
+
+Обычно, модуль для настройки CORS заголовков есть в http фреймворке и можно использовать его как по дефолту, так и с более тонкими настройками по необходимости. Например:
+- [Go Echo](https://echo.labstack.com/middleware/cors/)
+- [Javascript ExpressJS](https://expressjs.com/en/resources/middleware/cors.html)
+
+Подробнее про CORS заголовки можно прочитать [здесь](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
+
 ## WIP: Transactions, Locks, Isolation Levels, ACID
 ## WIP: Cache
 ## WIP: Full Text Search
