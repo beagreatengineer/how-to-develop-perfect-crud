@@ -98,7 +98,26 @@
 При описании конфигурации приложения используйте принципы 12factor. Изображение взято из статьи: [12 Factor App Revisited](https://architecturenotes.co/12-factor-app-revisited/)
 <img src="https://raw.githubusercontent.com/abstractart/how-to-develop-perfect-crud/main/12-Factor-app-revised.jpg">
 
+# Deployment
+В данном разделе будет приведены варианты того как можно задеплоить своё приложение.
+## Level 1: SSH, Git, VPS / Cloud (EC2) (without Docker)
+Что требуется:
+- Купить сервер у облачного провайдера
+- Разобраться с SSH и научиться подключатсья к серверу с локального компьютера
+- [Установить и настроить утилиты которые обеспечат базовую безопасность сервера](https://opensource.com/article/19/10/linux-server-security)
+- Установить и настроить на сервере инструменты которые необходимы для развертывания приложения
+    - Runtime (Ruby, Python, NodeJS)
+    - Databases (PG, MySQL, Redis) если они не развернуты на отдельных серверах.
+    - Reverse Proxy (Nginx)
+- Настроить автоматическую доставку новых версий кодовой базы на сервер (по кнопке с локального компьютера или например из CI). В этом могут помочь инструменты типа Capistrano, Fabric и многие другие.
 
+Задача со звездочкой: научиться писать Ansible playbooks, чтобы настройка сервера выполнялась в одну команду для программиста.
+## Level 2: Containers and clouds (Docker required)
+Если от вас требуется задеплоить приложение в облако и вы уже знакомы с Docker, то всё будет гораздо проще и стандартизовано
+- [Deploying Docker containers on ECS](https://docs.docker.com/cloud/ecs-integration/)
+## Level 3: Containers and Orchestrators (Docker required)
+- [Deploy to Swarm](https://docs.docker.com/get-started/swarm-deploy/)
+- [Deploy to Kubernetes](https://docs.docker.com/get-started/kube-deploy/)
 # API Design
 * Используй семантику [REST](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) как фундамент при описании API 
 * Формат данных: JSON (если не требуется другого)
