@@ -40,6 +40,7 @@
 - [External API Calls, Long-running tasks (And why we need message queue)](#external-api-calls-long-running-tasks-and-why-we-need-message-queue)
 - [📈Logs and Metrics](#logs-and-metrics)
 - [🛡️Security](#%EF%B8%8Fsecurity)
+- [CORS Headers (Cross-Origin Resource Sharing)](#cors-headers-cross-origin-resource-sharing)
 - [WIP: Transactions, Locks, Isolation Levels, ACID](#wip-transactions-locks-isolation-levels-acid)
 - [WIP: Cache](#wip-cache)
 - [WIP: Full Text Search](#wip-full-text-search)
