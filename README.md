@@ -82,26 +82,29 @@
 
 Старайтесь покрывать ваш код по [пирамиде тестирования](https://martinfowler.com/articles/practical-test-pyramid.html). Обратите внимание, что для тестов разного уровня могут использоваться разные инструменты. Для end to end тестирования можно использовать [Selenium](https://www.selenium.dev/) или [Cypress](https://www.cypress.io/how-it-works/). Для интеграционных удобно использовать `testcontainers`
 
-## Infrastructure around Code
-- Установлены Docker и docker-compose
-- В репозитории есть Dockefile с помощью которого можно собрать приложение в Docker Container ([как это делать правильно](https://cloud.google.com/architecture/best-practices-for-building-containers))
-- Все зависимости приложения (`PostgreSQL`, `S3`, `Redis`, `Kafka`, `RabbitMQ`) описаны в `docker-compose.yml`
-- Настройка приложения и запуск должны делаться максимально просто и прозрачно (1-2 команды)
-
-## ⚙️Configuration
+## ⚙️Configuration & Infrastructure around Code
+* На локальной машине разработчика установлены `Docker` и `docker-compose`
+* В репозитории есть Dockefile с помощью которого можно собрать приложение в `Docker container`
+  * [Best practices when writing a Dockerfile for a Ruby application](https://lipanski.com/posts/dockerfile-ruby-best-practices) (хотя советы применимы и к другим языкам)
+  * [Google Cloud: Best practices for building containers](https://cloud.google.com/architecture/best-practices-for-building-containers)
+* Все зависимости приложения (`PostgreSQL`, `S3`, `Redis`, `Kafka`, `RabbitMQ`) описаны в `docker-compose.yml`
+* Настройка приложения и запуск должны делаться максимально просто и прозрачно (для этого может понадобиться написать вспомогательные скрипты на `bash/zsh/powershell`)
 * [Приложение должно иметь несколько окружений (development, prod, test)](https://12factor.net/dev-prod-parity)
-* Настроен application сервер для production сборки приложения:
+* Для `production` сборки приложения используется рекомендуемый application сервер, например:
    * Puma for Ruby
    * Gunicorn3 for Python
    * Undertow for Java
-* При описании конфигурации приложения используйте советы из https://12factor.net
+
+При описании конфигурации приложения используйте принципы 12factor. Изображение взято из статьи: [12 Factor App Revisited](https://architecturenotes.co/12-factor-app-revisited/)
+<img src="https://raw.githubusercontent.com/abstractart/how-to-develop-perfect-crud/main/12-Factor-app-revised.jpg">
+
 
 ## API Design
 * Используй семантику [REST](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) как фундамент при описании API 
 * Формат данных: JSON (если не требуется другого)
 * В репозитории есть возможность открыть [Swagger](https://swagger.io/) спецификацию для знакомства с API
   * Её можно написать самостоятельно
-  * А можно генерировать c помощью утилит: [Rails (Ruby)](https://github.com/rswag/rswag), [Flask (Python)](https://github.com/thomaxxl/safrs), [Echo (Golang)](https://github.com/swaggo/echo-swagger)
+  * А можно генерировать c помощью утилит: [rswag (Rails)](https://github.com/rswag/rswag), [safrs (Flask)](https://github.com/thomaxxl/safrs), [echo-swagger (Echo/Golang)](https://github.com/swaggo/echo-swagger)
 
 Если считаешь что связка REST+JSON не подходит под задачу, или по заданию требуется другой формат, то стоит изучить альтернативы:
 - gRPC
@@ -115,7 +118,7 @@
 * JSON Web Tokens (посложнее)
 
 **Авторизация** – предоставление определенному лицу прав на выполнение определенных действий.
-Например: пользователь которого забанил администратор не может публиковать комменты (хотя он прошел аутентификацию на сайте).
+Например: пользователь которого забанил администратор не может публиковать комментарии к постам (хотя он прошел аутентификацию на сайте).
 
 Примеры библиотек:
 - [Pundit for Ruby](https://github.com/varvet/pundit)
@@ -123,7 +126,7 @@
 
 ## MVC Explanation
 Цель: разделить обязанности в коде между компонентами. MVC это один из вариантов достижения цели и не требует от разработчика сильной когнитивной нагрузки (по сравнению с другими подходами)
-<img src="https://harbinger-systems.com/blog/wp-content/uploads/2015/08/MVC-Architecture-With-Service-Layer1-1024x477.png">
+<img src="https://github.com/abstractart/how-to-develop-perfect-crud/blob/main/mvc-with-service.png?raw=true">
 ### Controller
 - Принимает тело запроса, валидирует его на соответствие API
 - Проверяет authorization + authentification 
