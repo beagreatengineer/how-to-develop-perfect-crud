@@ -239,6 +239,7 @@ API не должно возвращать все поля модели.
 - Убедись, что не используешь версии библиотек в которых есть уязвимости, проверять это можно автоматически с помощью утилит, например:
   - [bundler-audit for Ruby](https://github.com/rubysec/bundler-audit)
   - [pip-audit for Python](https://pypi.org/project/pip-audit/)
+  - [local-php-security-checker for PHP](https://github.com/fabpot/local-php-security-checker) или команда `symfony check:security`, если используется фреймворк [Symfony](https://symfony.com/)
 - Настрой dependabot, который будет автоматически обновлять версии библиотек
 - Убедись, что приложение достаточно защищено от актуальных уязвимостей - [OWASP TOP 10](https://owasp.org/www-project-top-ten/). Помочь в этом нелегком деле может [чеклист №1](https://github.com/shieldfy/API-Security-Checklist) и  [№2 (с примерами на Ruby on Rails)](https://github.com/brunofacca/zen-rails-security-checklist)
 # CORS Headers (Cross-Origin Resource Sharing)
