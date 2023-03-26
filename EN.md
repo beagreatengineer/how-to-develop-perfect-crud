@@ -55,16 +55,16 @@ If you have a proposal about covering a specific technology here, don't be shy:
 * Repository settings must disable force pushing into (`push --force`) into main branches (`master`, `main`, release branches)
 * 'README' should contain:
   - info about the project
-  - short summary of tooling and technologies
+  - short summary of tooling and the tech stack
   - instructions for setting up and launching the application
 * Use feature branches, pull requests. Refer to this great [article](https://www.flagship.io/git-branching-strategies/) with comparison of different Git Branching Strategies. 
-* Readable commit history. Here is a good set of rules [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
+* Use readable commit history. Here is a good set of rules [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
 * Set up Continuous Integration (Gitlab CI / Github Actions)
 * `feature/` and master branches should be set up with:
   * test runners and [coverage](https://www.guru99.com/test-coverage-in-software-testing.html) stats
   * linting  
 * Setting up Continuous Delivery - app delpoyment into differnet environmetns (e.g. test/staging/prod) would be a huge plus!
-* Setting up and launching [dependabot](https://docs.github.com/ru/code-security/dependabot/working-with-dependabot)
+* Optional: Set up [dependabot](https://docs.github.com/ru/code-security/dependabot/working-with-dependabot)
 
 # Code Style
 Before development:
@@ -75,27 +75,27 @@ Before development:
   * IDEA
   * Vim, emacs
 * [EditorConfig](https://editorconfig.org/) plugin / add-on is up and running for your editor
-* Code formatters are up and running: 
+* Set up Code formatters: 
   * Rubocop for Ruby
   * Pylint/Black/PEP8 for Python
 # ✔️Tests
-* Установлены библиотеки для написания тестов различных видов (unit, integration). Например:
+* Install libraries for writing various test types (unit, integration). For instance: 
    * Pytest for Python
    * RSpec for Ruby
    * Testify, testcontainers for Golang
-* После прогона тестов автоматически считается test coverage
-* Пишите unit-тесты по паттерну [AAA (Arange Act Assert)](https://medium.com/@pjbgf/title-testing-code-ocd-and-the-aaa-pattern-df453975ab80)
+* Test coverage is calculated automatically after each test run
+* Apply [AAA (Arrange Act Assert)](https://medium.com/@pjbgf/title-testing-code-ocd-and-the-aaa-pattern-df453975ab80) pattern when writing unit tests
 
-Старайтесь покрывать ваш код по [пирамиде тестирования](https://martinfowler.com/articles/practical-test-pyramid.html). Обратите внимание, что для тестов разного уровня могут использоваться разные инструменты. Для end to end тестирования можно использовать [Selenium](https://www.selenium.dev/) или [Cypress](https://www.cypress.io/how-it-works/). Для интеграционных удобно использовать `testcontainers`
+Try to adhere to the [testing pyramid] (https://martinfowler.com/articles/practical-test-pyramid.html) principle. Note that different test types require different tools. For end-to-end (e2e) testing you can try using [Selenium](https://www.selenium.dev/) or [Cypress](https://www.cypress.io/how-it-works/). Integration tests can be added via `testcontainers`.
 
 # ⚙️Configuration & Infrastructure around Code
-* На локальной машине разработчика установлены `Docker` и `docker-compose`
-* В репозитории есть Dockefile с помощью которого можно собрать приложение в `Docker container`
-  * [Best practices when writing a Dockerfile for a Ruby application](https://lipanski.com/posts/dockerfile-ruby-best-practices) (хотя советы применимы и к другим языкам)
+* Have `docker` and `docker-compose` installed on your local machine
+* There is a Dockerfile in your repository which can be used to build your app into a `Docker container`
+  * [Best practices when writing a Dockerfile for a Ruby application](https://lipanski.com/posts/dockerfile-ruby-best-practices) (although, these tips can be useful for other languages)
   * [Google Cloud: Best practices for building containers](https://cloud.google.com/architecture/best-practices-for-building-containers)
-* Все зависимости приложения (`PostgreSQL`, `S3`, `Redis`, `Kafka`, `RabbitMQ`) описаны в `docker-compose.yml`
-* Настройка приложения и запуск должны делаться максимально просто и прозрачно (для этого может понадобиться написать вспомогательные скрипты на `bash/zsh/powershell`)
-* [Приложение должно иметь несколько окружений (development, prod, test)](https://12factor.net/dev-prod-parity)
+* All app dependencies are listed in a `docker-compose.yml` file
+* Set up and launch ofr your application should be as easy nad straightforward. It is possible that you may need to write some additional `base/zsh/powershell` scripts
+* [Your application should have multiple environments (development, prod, test)](https://12factor.net/dev-prod-parity)
 * Для `production` сборки приложения используется рекомендуемый application сервер, например:
    * Puma for Ruby
    * Gunicorn3 for Python
