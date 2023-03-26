@@ -94,61 +94,62 @@ Try to adhere to the [testing pyramid] (https://martinfowler.com/articles/practi
   * [Best practices when writing a Dockerfile for a Ruby application](https://lipanski.com/posts/dockerfile-ruby-best-practices) (although, these tips can be useful for other languages)
   * [Google Cloud: Best practices for building containers](https://cloud.google.com/architecture/best-practices-for-building-containers)
 * All app dependencies are listed in a `docker-compose.yml` file
-* Set up and launch ofr your application should be as easy nad straightforward. It is possible that you may need to write some additional `base/zsh/powershell` scripts
+* Setting up and launching your application should be as easy and straightforward. It is possible that you may need to write some additional `base/zsh/powershell` scripts
 * [Your application should have multiple environments (development, prod, test)](https://12factor.net/dev-prod-parity)
-* Для `production` сборки приложения используется рекомендуемый application сервер, например:
+* Use a suitable application server for your `production` environment. For example: 
    * Puma for Ruby
    * Gunicorn3 for Python
    * Undertow for Java
 
-При описании конфигурации приложения используйте принципы 12factor. Изображение взято из статьи: [12 Factor App Revisited](https://architecturenotes.co/12-factor-app-revisited/)
+When writing the configuration for your application, use the 12factor principles. The diagram below is copied from the [12 Factor App Revisited](https://architecturenotes.co/12-factor-app-revisited/) article
 <img src="https://raw.githubusercontent.com/abstractart/how-to-develop-perfect-crud/main/12-Factor-app-revised.jpg">
 
-
 # API Design
-* Используй конвенции [REST](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) как фундамент при именовании путей, типов операций и выборе статусов ответов API  
-* Формат данных: JSON (если не требуется другого)
-* В репозитории есть возможность открыть [Swagger](https://swagger.io/) спецификацию для знакомства с API
-  * Её можно написать самостоятельно
-  * А можно генерировать c помощью утилит: [rswag (Rails)](https://github.com/rswag/rswag), [safrs (Flask)](https://github.com/thomaxxl/safrs), [echo-swagger (Echo/Golang)](https://github.com/swaggo/echo-swagger)
-
+* Use the REST](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) architecture conventions as your guiding principle for naming paths, types of operations and API response statuses.
+* Response type: JSON (unless otherwise specified)
+* There is an option to open Swagger in your repository to familiarize the next developer with your API design
+  * It can be written by hand
+  * Or you can use a codegen: [rswag (Rails)](https://github.com/rswag/rswag), [safrs (Flask)](https://github.com/thomaxxl/safrs), [echo-swagger (Echo/Golang)](https://github.com/swaggo/echo-swagger)
+  
 Если считаешь что связка REST+JSON не подходит под задачу, или по заданию требуется другой формат, то стоит изучить альтернативы:
+If you think that REST+JSON option is not a great fit for your application design, or your task requires using a different format, it could be beneficial to familiarize yourself with some alternatives:
 - [SOAP](https://www.w3.org/TR/soap12-part1/)
 - [gRPC](https://grpc.io/)
 - [GraphQL](https://graphql.org/)
 
-# Authorization & Authentification
-**Аутентификация** – процедура проверки подлинности, например, проверка подлинности пользователя путем сравнения введенного им пароля с паролем, сохраненным в базе данных.
+# Authorization & Authentication
+**Authentication** - is a process of verifying a user identity. The most common way to authenticate a user is to compare the password they entered with the password saved in the database.
 
-В качестве аутентификации по API можно использовать:
-* HTTP Basic Auth (простой путь)
-* JSON Web Tokens (посложнее)
+The following strategies can be used to authenticate API users: 
+* HTTP Basic Auth (easy)
+* JSON Web Tokens (a bit more complex)
 
-**Авторизация** – предоставление определенному лицу прав на выполнение определенных действий.
-Например: пользователь которого забанил администратор не может публиковать комментарии к постам (хотя он прошел аутентификацию на сайте).
+**Authorization** - granting a particular user the rights for performing specific actions. 
+For instance: a user who has been banned by admin cannot post comments (even though they have been successfully authenticated). 
 
-Примеры библиотек:
+Some examples of libraries:
 - [Pundit for Ruby](https://github.com/varvet/pundit)
 - [Casbin (Many languages supported)](https://github.com/casbin/casbin)
 
 # MVC Explanation
-Цель: разделить обязанности в коде между компонентами. MVC это один из вариантов достижения цели и не требует от разработчика сильной когнитивной нагрузки (по сравнению с другими подходами)
+Goal: split the responsibilities between components. MVC is a type of architecture that allows a developer to build applications without excessive cognitive load (compared to other web architecture types) 
+
 <img src="https://github.com/abstractart/how-to-develop-perfect-crud/blob/main/mvc-with-service.png?raw=true">
 ## Controller
-- Принимает тело запроса, валидирует его на соответствие API
-- Проверяет authorization + authentification 
-- Вызывает Service, передает ему данные
-- На основе возвращаемого значения от Service вызывает код формирующий нужный ответ API (через View)
+- Accepts the request and validates request body based on rules set within your API
+- Checks authorization + authentication
+- Calls a Service and injects data into it 
+- Based on Service return, a controller formats a response and passes it into a View
 ## Model
-* Хранит только описание схемы данных и связи с другими моделями
-* Бизнес логики хранит по минимуму а лучше не хранит вообще
-* Используется для того чтобы делать запросы к БД на чтение и запись
+* Reflects basic description of schema and relations with other models
+* Contains minimum business logic, or ideally none at all
+* Is used to make requests to the DB for reads and writes
 ## Service
-* Принимает данные от контроллера, валидирует тело
-* Использует Model для чтения или записи данных в БД.
-* Отвечает за бизнес-логику приложения
+* Accepts arguments from controllers and validates the request body
+* Uses a Model for reading and writing data to DB.
+* Is responsible for the business logic of your application
 ## View
-* Отвечает за то чтобы на основе данных сформировать API ответ.
+* Builds an API response based on data passed to it
 
 # 📐✏️👷‍♀️Architecture, Design Patterns, Refactoring, etc
 После того как MVC стал открытой книгой стоит углубиться и изучить:
