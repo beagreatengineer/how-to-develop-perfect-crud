@@ -125,7 +125,7 @@ The following strategies can be used to authenticate API users:
 * JSON Web Tokens (a bit more complex)
 
 **Authorization** - granting a particular user the rights for performing specific actions. 
-For instance: a user who has been banned by admin cannot post comments (even though they have been successfully authenticated). 
+For instance: a user who was banned by admin cannot post comments (even though they have been successfully authenticated). 
 
 Some examples of libraries:
 - [Pundit for Ruby](https://github.com/varvet/pundit)
@@ -152,51 +152,52 @@ Goal: split the responsibilities between components. MVC is a type of architectu
 * Builds an API response based on data passed to it
 
 # 📐✏️👷‍♀️Architecture, Design Patterns, Refactoring, etc
-После того как MVC стал открытой книгой стоит углубиться и изучить:
-- подходы к построению архитектуры приложения
-- принципы которые помогают писать код устойчивый к изменениям.
+After grasping the concept of MVC, try developing a deeper understanding and study:
+- different app architecture approaches
+- patterns that can make your code future-proof
 
-Бесплатные ресурсы, которые рекомендую для старта:
+A few courses that I recommend:
 - [Categorized overview of programming principles & design patterns](https://github.com/webpro/programming-principles)
 - [Refactoring Patterns and Design Patters Reference](https://refactoring.guru)
 - [Summary of "Clean code" by Robert C. Martin](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29)
 - [Summary of "Clean Architecture" by Robert C. Martin](https://gist.github.com/ygrenzinger/14812a56b9221c9feca0b3621518635b)
 
 # 🔒CRUD: Validations
-Перед тем как сохранять данные в БД обязательно:
-- отвалидируйте данные на тип (там где ожидается строка пришла строка, где int там int итп)
-- и соответствие тела запроса API (если пользователь отправил поля которые не имеет права отпралять в БД мы должны их игнорировать)
+Before persisting data in the database, one should:
+- validate the the types (e.g. rows that expect string data types receive string data etc.)
+- ensure API request body consitency (if a request contains fields that do not have matching columns in the databsae, these fields should be ignored)
 # CRUD: Database
-* Используйте ORM (или что-то подобное), если в задании не указано что нужно писать чистый SQL.
-  * Проще для старта
-  * Безопасно (Большинство ORM предоставлют защиту от SQL injections из коробки)
-* Используйте механизм миграций чтобы создавать таблицы и другие сущности в вашей БД (Rails Migrations, Flask-Migrate, etc)
-* При описании таблиц важно сразу указать всем столбцам необходимые constraints (NULLABLE, DEFAULT VALUE, UNIQUE, PRIMARY KEY)
-* При описании таблиц важно сразу указать индексы для столбцов по которым ожидается поиск.
-* Для защиты API от перебора можно использовать как PRIMARY KEY `uuid` вместо `serial`
+* Use and ORM (or a similar tool), unless your requirements specify using pure SQL.
+  * Easier to operate
+  * Safe, because most ORMs offer protection against common SQL vulnurabilities out of the box. 
+* Use migrations to create tables and other entities in your DB (Rails Migrations, Flask-Migrate, etc)
+* When describing tables, it is important to specify required constraints (NULLABLE, DEFAULT VALUE, UNIQUE, PRIMARY KEY)
+* When describing tables, it is important to specify indicies for columns that are expected to be indexed.
+* To protect an API from sequencing attacks, you can try using a `uuid` instead of a `serial`
 
 
-P.S. При описании миграций полезно подсматривать [сюда](https://github.com/ankane/strong_migrations), чтобы не написать миграцию которая может заблокировать БД.
+P.S. Try following the principle of [strong migrations](https://github.com/ankane/strong_migrations) to avoid blocking the DB. 
 # CRUD: Operations
 ## LIST (HTTP GET)
-* Для каждого ресурса в ответе должно присутствовать ID.
-* Ресурсы должны быть отсортированными по какому либо признаку, например по времени создания.
-* API должен поддерживать пагинацию (чтобы не возвращать все сущности из БД за раз) [Разбор вариантов пагинации](https://dev.to/appwrite/this-is-why-you-should-use-cursor-pagination-4nh5)
-* Количество запросов к БД в рамках запроса должно быть фиксированным (Отсутствует [N+1 проблема](https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem-in-orm-object-relational-mapping))
+* A response should include ID(s) for every resource.
+* Resources should be sorted by some type of attribute such as date of creation.
+* An API should support pagination to avoid returning all resources at one. [Database pagination techniques](https://dev.to/appwrite/this-is-why-you-should-use-cursor-pagination-4nh5)
+* The number of requests to the database within a single API request must be limited avoiding [the N+1 queries problem](https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem-in-orm-object-relational-mapping)
 
-API не должно возвращать все поля модели.
-Пример: если наше API возвращает список постов то оно должно возвращать:
+An API should not return all the fields for a model.
+Example of a response for a list of articles: 
   * ID
-  * Название поста
-  * Имя автора
-  * Первые несколько предложений статьи (превью)
+  * Title
+  * Author name
+  * First few sentences of the body
 
-Полный текст поста для этого эндпоинта не нужен.
+Sending full text body is really unncessary.  
 
 ## READ (HTTP GET)
-* Возвращаем полностью ресурс со всеми полями, ничего особенного
+* Returning a resources with all of its fields. Nothing special here.
 ## CREATE (HTTP POST)
 * Валидируем данные на предмет полей которые пользователь не имеет права изменять в БД а следовательно передавать.
+* We validate 
 * Делаем в БД INSERT
 * Возвращаем в ответ ID и содержимое.
 
