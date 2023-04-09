@@ -2,7 +2,7 @@
 [<img src="https://img.shields.io/badge/channel-telegram-blue">](https://t.me/careerunderhood) [<img src="https://img.shields.io/badge/message-telegram-blue">](https://t.me/ea_kozlov)
 
 # 🤔 What is this?
-This article is an attempt to combine best practices that are helpful to keep in mind when developing backend applications.
+This article is an attempt to combine good practices that are useful to keep in mind and apply when developing a backend application.
 
 It can be used as a checklist if:
 - You are starting a greenfield project and want to ensure that best practices are used right from the start.
@@ -27,7 +27,7 @@ If you have a proposal about covering a specific technology here, don't be shy:
 - [✔️Tests](#%EF%B8%8Ftests)
 - [⚙️Configuration & Infrastructure around Code](#%EF%B8%8Fconfiguration--infrastructure-around-code)
 - [API Design](#api-design)
-- [Authorization & Authentification](#authorization--authentification)
+- [Authorization & Authentication](#authorization--authentification)
 - [MVC Explanation](#mvc-explanation)
   - [Controller](#controller)
   - [Model](#model)
@@ -63,7 +63,7 @@ If you have a proposal about covering a specific technology here, don't be shy:
 * `feature/` and master branches should be set up with:
   * test runners and [coverage](https://www.guru99.com/test-coverage-in-software-testing.html) stats
   * linting  
-* Setting up Continuous Delivery - app delpoyment into differnet environmetns (e.g. test/staging/prod) would be a huge plus!
+* Setting up Continuous Delivery - app deployment into different environments (e.g. test/staging/prod) would be a huge plus!
 * Optional: Set up [dependabot](https://docs.github.com/ru/code-security/dependabot/working-with-dependabot)
 
 # Code Style
@@ -111,7 +111,6 @@ When writing the configuration for your application, use the 12factor principles
   * It can be written by hand
   * Or you can use a codegen: [rswag (Rails)](https://github.com/rswag/rswag), [safrs (Flask)](https://github.com/thomaxxl/safrs), [echo-swagger (Echo/Golang)](https://github.com/swaggo/echo-swagger)
   
-Если считаешь что связка REST+JSON не подходит под задачу, или по заданию требуется другой формат, то стоит изучить альтернативы:
 If you think that REST+JSON option is not a great fit for your application design, or your task requires using a different format, it could be beneficial to familiarize yourself with some alternatives:
 - [SOAP](https://www.w3.org/TR/soap12-part1/)
 - [gRPC](https://grpc.io/)
@@ -135,6 +134,7 @@ Some examples of libraries:
 Goal: split the responsibilities between components. MVC is a type of architecture that allows a developer to build applications without excessive cognitive load (compared to other web architecture types) 
 
 <img src="https://github.com/abstractart/how-to-develop-perfect-crud/blob/main/mvc-with-service.png?raw=true">
+
 ## Controller
 - Accepts the request and validates request body based on rules set within your API
 - Checks authorization + authentication
@@ -164,15 +164,15 @@ A few courses that I recommend:
 
 # 🔒CRUD: Validations
 Before persisting data in the database, one should:
-- validate the the types (e.g. rows that expect string data types receive string data etc.)
-- ensure API request body consitency (if a request contains fields that do not have matching columns in the databsae, these fields should be ignored)
+- validate the types (e.g. rows that expect string data types receive string data etc.)
+- ensure API request body consistency (if a request contains fields that do not have matching columns in the database, these fields should be ignored)
 # CRUD: Database
 * Use and ORM (or a similar tool), unless your requirements specify using pure SQL.
   * Easier to operate
-  * Safe, because most ORMs offer protection against common SQL vulnurabilities out of the box. 
+  * Safe, because most ORMs offer protection against common SQL vulnerabilities out of the box. 
 * Use migrations to create tables and other entities in your DB (Rails Migrations, Flask-Migrate, etc)
 * When describing tables, it is important to specify required constraints (NULLABLE, DEFAULT VALUE, UNIQUE, PRIMARY KEY)
-* When describing tables, it is important to specify indicies for columns that are expected to be indexed.
+* When describing tables, it is important to specify indices for columns that are expected to be indexed.
 * To protect an API from sequencing attacks, you can try using a `uuid` instead of a `serial`
 
 
@@ -191,72 +191,71 @@ Example of a response for a list of articles:
   * Author name
   * First few sentences of the body
 
-Sending full text body is really unncessary.  
+Sending a full text body is really unnecessary.
 
 ## READ (HTTP GET)
-* Returning a resources with all of its fields. Nothing special here.
+* Returning resources with all of their fields. Nothing special here.
 ## CREATE (HTTP POST)
-* Валидируем данные на предмет полей которые пользователь не имеет права изменять в БД а следовательно передавать.
-* We validate 
-* Делаем в БД INSERT
-* Возвращаем в ответ ID и содержимое.
+* Filter out fields that should not be accessed by users.
+* Commit the INSERT in our DB.
+* Send a response with our newly-created resource ID and content. 
 
-Задачи со звездочкой:
-- Убедиться что реализованное API идемпотентно: [Подробнее](https://habr.com/ru/company/yandex/blog/442762/)
-- Настроить Rate Limiter чтобы защитить БД от спама и мусора
+Bonus points:
+- Make sure that the API endpoint is [idempotent](https://restfulapi.net/idempotent-rest-apis/)
+- Set up a rate limiter to protect the database from spam
 ## UPDATE (HTTP PUT/PATCH)
-* Разобраться в чем отличие между PUT и PATCH в HTTP
-* Валидировать тело запроса на предмет полей которые пользователь не имеет права изменять в БД а следовательно передавать.
-* Проверка права на редактирование у пользователя
-  * Например API не должно позволять пользователю редактировать чужие комментарии :)
-* Реализовать обновление согласно выбранному методу
+* Know the difference between PUT and PATCH HTTP methods
+* Filter out fields that should not be accessed by users.
+* User authorization check
+  * Example: users should not be allowed to edit other users' comments.
+* Commit the update depending upon the selected HTTP method.
 
 ## DESTROY (HTTP DELETE)
-* Реализовать удаление предварительно проверив наличие сущности в БД и права на удаление у пользователя
+* Commit deletion after checking the existing of resource in the database and user authorization
 
-Дополнительно может быть полезно: реализовать soft удаление (скрываем от пользователя, оставляем в БД)
+Additionally, you might considering implementing "soft-deletion" (hide deleted resources from users, but keep them in the DB)
 # External API Calls, Long-running tasks (And why we need message queue)
-Если в рамках API требуется:
-- выполнять запросы к внешним системам
-- генерировать отчеты/выполнять долгие запросы к БД 
-то стоит подумать о том чтобы делать эти операции за пределами HTTP запроса. 
+If an API needs to:
+- send requests to third-party resources
+- generate reports or perform long requests to DB 
+then it might be a good idea to perform these operations outside of HTTP requests.
 
-Для этого может понадобиться очередь (Queue) в которую можно будет добавлять задачу (Task). 
+To do these operations, we will need a Queue, to which we'll add or remove Tasks.
 
-Примеры высокоуровневых библиотек которых решают задачу с постановкой, чтением и обработкой задач:
-* Celery for Python (Задачи хранятся в `Redis`)
-* Sidekiq for Ruby (Задачи хранятся в `Redis`)
+Examples of high-level libraries that solve the problem of scheduling, reading and processing tasks:
+* Celery for Python (tasks are stored in `Redis`)
+* Sidekiq for Ruby (tasks are stored in `Redis`)
 
-Стоит отметить, что `Redis` это не единственный вариант для хранения очереди + не для всех задач он подходит.
-Поэтому полезно изучить как минимум 2 более продвинутых варианта для хранения и обработки очередей: `RabbitMQ` и `Kafka`.
+It is important to note that Redis is not the only option and it might not be suitable for all types of applications. 
+Hence, it would be a good idea to learn at least two other advanced libraries for storing and processing queues - `RabbitMG` an d 'Kafka'
 
-Доп.ссылки:
-- [RabbitMQ и Apache Kafka: что выбрать](https://slurm.io/tpost/phdmogo9y1-rabbitmq-i-apache-kafka-chto-vibrat-i-mo)
-- [Latency, throughput, and availability: system design interview concepts](https://igotanoffer.com/blogs/tech/latency-throughput-availability-system-design-interview) - Подробнее о том, почему так важно чтобы HTTP запросы были быстрыми
+Additional links:
+- [Latency, throughput, and availability: system design interview concepts](https://igotanoffer.com/blogs/tech/latency-throughput-availability-system-design-interview) - A more detailed explanation of why fast processing HTTP requests is so important.
 
 # 📈Logs and Metrics
-- Настроить Prometheus метрики с информацией о состоянии HTTP API и райнтайме приложения. Рекомендуется использовать готовые пакеты, которые собирают метрики о работе приложения по методикам [RED (Rate Error Duration)](https://www.infoworld.com/article/3638693/the-red-method-a-new-strategy-for-monitoring-microservices.html) и [USE (Utilization Saturation Errors)](https://www.brendangregg.com/usemethod.html):
-  - [prometheus, promauto, promhttp для Go](https://prometheus.io/docs/guides/go-application/)
-  - [starlette-prometheus для Python](https://github.com/perdy/starlette-prometheus)
-- [Логи должны писаться только в stdout](https://12factor.net/logs)
-- [Логи должны иметь строгий формат, например это может быть JSON](https://coralogix.com/blog/json-logging-why-how-what-tips/)
+- et up Prometheus metrick with data about the state of HTTP API and application runtime. We recommend using settings that collect application performance metrics using RED (Rate Error Duration)](https://www.infoworld.com/article/3638693/the-red-method-a-new-strategy-for-monitoring-microservices.html) and [USE (Utilization Saturation Errors)](https://www.brendangregg.com/usemethod.html) methodologies:
+  - [prometheus, promauto, promhttp for Go](https://prometheus.io/docs/guides/go-application/)
+  - [starlette-prometheus for Python](https://github.com/perdy/starlette-prometheus)
+- [Logs should only be sent to stdout](https://12factor.net/logs)
+- [Logs should have a strict format like JSON](https://coralogix.com/blog/json-logging-why-how-what-tips/)
 
 
 # 🛡️Security
-- Убедись, что не используешь версии библиотек в которых есть уязвимости, проверять это можно автоматически с помощью утилит, например:
+- Check library versions you are using for known vulnerabilities. Some utilities that can audit your libraries are:
   - [bundler-audit for Ruby](https://github.com/rubysec/bundler-audit)
   - [pip-audit for Python](https://pypi.org/project/pip-audit/)
-  - [local-php-security-checker for PHP](https://github.com/fabpot/local-php-security-checker) или команда `symfony check:security`, если используется фреймворк [Symfony](https://symfony.com/)
-- Настрой dependabot, который будет автоматически обновлять версии библиотек
-- Убедись, что приложение достаточно защищено от актуальных уязвимостей - [OWASP TOP 10](https://owasp.org/www-project-top-ten/). Помочь в этом нелегком деле может [чеклист №1](https://github.com/shieldfy/API-Security-Checklist) и  [№2 (с примерами на Ruby on Rails)](https://github.com/brunofacca/zen-rails-security-checklist)
+  - [local-php-security-checker for PHP](https://github.com/fabpot/local-php-security-checker) or the  `symfony check:security` command, if you are using [Symfony](https://symfony.com/) framework
+- Set up dependabot to check and update library versions
+- Ensure that the app is protected against common vulnerabilities - [OWASP TOP 10](https://owasp.org/www-project-top-ten/). Here is a tool that can help with this difficult task [checklist №1](https://github.com/shieldfy/API-Security-Checklist) and [№2 (with examples for Ruby on Rails)](https://github.com/brunofacca/zen-rails-security-checklist)
 # CORS Headers (Cross-Origin Resource Sharing)
-Если запросы к твоему API будут делать из браузерных скриптов, например Single Page Aplication, построенных на современных Javascript фреймворках (React, Angular, Vue.js) и домен API будет отличаться от домена клиентского приложения, то нужно в API добавить CORS заголовки, чтобы браузер не блокировал ответы от API.
 
-Обычно, модуль для настройки CORS заголовков есть в http фреймворке и можно использовать его как по дефолту, так и с более тонкими настройками по необходимости. Например:
+When dealing with modern single page applications written in popular frameworks like React, Vue.js or Angular, you are likely to encounter a scenario where a client domain will be different from your API domain. In this case, your API will have to include CORS headers to let the browser know that responses coming from the API are permitted.
+
+Typically, a CORS module is already available in your framework of choice and you can use its defaults. If you need more a more granular configuration, here is a few libraries that can help: 
 - [Go Echo](https://echo.labstack.com/middleware/cors/)
 - [Javascript ExpressJS](https://expressjs.com/en/resources/middleware/cors.html)
 
-Подробнее про CORS заголовки можно прочитать [здесь](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
+You can learn more about CORS headers here [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
 # WIP: Transactions, Locks, Isolation Levels, ACID
 # WIP: Cache
