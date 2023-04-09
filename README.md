@@ -110,9 +110,6 @@
 Многие сервисы предоставляют бесплатный хостинг для небольших проектов, например:
 - https://render.com
 - https://www.netlify.com
-
-
-
 Больше вариантов здесь: https://free-for.dev/#/?id=web-hosting
 
 Изучите их перед тем как переходить к следующим уровням, возможно вам будет достаточно теъ фич что они предлагают :)
@@ -138,12 +135,29 @@
 - Настроить Lets Encrypt сертификаты для данного домена + прописать сертификаты в Nginx (чтобы браузер не пугал пользователей сайта о том что сайт небезопасный :))
 
 Задача со звездочкой: научиться писать Ansible playbooks, чтобы настройка сервера выполнялась в одну команду для программиста.
-## Level 2: Containers and clouds (Docker required)
+## Level 2: Containers and VPS (Docker required)
+Что нужно:
+- Настроенный Docker на VPS
+
+Установленный docker-compose на CI / Локальной машине разработчика.
+
+Деплой будет происходить через запуск контейнера на удаленной машине:
+```
+DOCKER_HOST=“ssh://user@your_vps_domain_or_ip” docker-compose up -d
+```
+
+Таким образом мы мы можем описать приложение и все его зависимости в docker-compose.yml и развернуть в одну команду.
+
+## Level 3: Containers and clouds (Docker required)
 Если от вас требуется задеплоить приложение в облако и вы уже знакомы с Docker, то всё будет гораздо проще и стандартизовано
 - [Deploying Docker containers on ECS](https://docs.docker.com/cloud/ecs-integration/)
-## Level 3: Containers and Orchestrators (Docker required)
+
+
+## Level 4: Containers and Orchestrators (Docker required)
 - [Deploy to Swarm](https://docs.docker.com/get-started/swarm-deploy/)
 - [Deploy to Kubernetes](https://docs.docker.com/get-started/kube-deploy/)
+
+
 # API Design
 * Используй конвенции [REST](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) как фундамент при именовании путей, типов операций и выборе статусов ответов API  
 * Формат данных: JSON (если не требуется другого)
