@@ -21,6 +21,7 @@
 - [Code Style](#code-style)
 - [✔️Tests](#%EF%B8%8Ftests)
 - [⚙️Configuration & Infrastructure around Code](#%EF%B8%8Fconfiguration--infrastructure-around-code)
+- [Deployment](#deployment)
 - [API Design](#api-design)
 - [Authorization & Authentification](#authorization--authentification)
 - [MVC Explanation](#mvc-explanation)
@@ -101,6 +102,14 @@
 
 # Deployment
 В данном разделе будет приведены варианты того как можно задеплоить своё приложение, от простого и топорного до production ready практик.
+## Level 0: Use free hostings
+Многие сервисы предоставляют бесплатный хостинг для небольших проектов, например:
+- https://render.com
+- https://www.netlify.com
+Больше вариантов здесь: https://free-for.dev/#/?id=web-hosting
+
+Изучите их перед тем как переходить к следующим уровням, возможно вам будет достаточно теъ фич что они предлагают :)
+
 ## Level 1: SSH, Git, VPS / Cloud (EC2) (without Docker)
 Что требуется:
 - Купить сервер у облачного провайдера, убедиться что провайдер выдал вам IP адрес.
