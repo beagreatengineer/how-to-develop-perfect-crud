@@ -180,6 +180,10 @@ DOCKER_HOST=“ssh://user@your_vps_domain_or_ip” docker-compose up -d
   * Её можно написать самостоятельно
   * А можно генерировать c помощью утилит: [rswag (Rails)](https://github.com/rswag/rswag), [safrs (Flask)](https://github.com/thomaxxl/safrs), [echo-swagger (Echo/Golang)](https://github.com/swaggo/echo-swagger)
 
+Полезные ссылки:
+- [Zalando RESTful API and Event Guidelines](https://opensource.zalando.com/restful-api-guidelines/)
+
+
 Если считаешь что связка REST+JSON не подходит под задачу, или по заданию требуется другой формат, то стоит изучить альтернативы:
 - [SOAP](https://www.w3.org/TR/soap12-part1/)
 - [gRPC](https://grpc.io/)
