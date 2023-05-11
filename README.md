@@ -55,6 +55,8 @@
 - [WIP: Cache](#wip-cache)
 - [WIP: Full Text Search](#wip-full-text-search)
 <!-- TOC end -->
+
+
 # Repository
 * Код должен храниться в публичном/приватном Git репозитории (Github / Gitlab / Bitbucket)
 * В Git-репозитории должен быть запрещен push с флагом `--force` в основные ветки (`master`, `main`, релизные ветки).
@@ -83,6 +85,8 @@
 * Установлены наиболее популярные инструменты по верификации качества кода, например
   * Rubocop for Ruby
   * Pylint/Black/PEP8 for Python
+
+
 # ✔️Tests
 * Установлены библиотеки для написания тестов различных видов (unit, integration). Например:
    * Pytest for Python
@@ -111,6 +115,8 @@
 
 # Deployment
 В данном разделе будет приведены варианты того как можно задеплоить своё приложение, от простого и топорного до production ready практик.
+
+
 ## Level 0: Use free hostings
 Многие сервисы предоставляют бесплатный хостинг для небольших проектов, например:
 - https://render.com
