@@ -51,7 +51,7 @@
 - [📈Logs and Metrics](#logs-and-metrics)
 - [🛡️Security](#%EF%B8%8Fsecurity)
 - [CORS Headers (Cross-Origin Resource Sharing)](#cors-headers-cross-origin-resource-sharing)
-- [Cache](#cache)
+- [🚄Cache](#cache)
 - [WIP: Transactions, Locks, Isolation Levels, ACID](#wip-transactions-locks-isolation-levels-acid)
 - [WIP: Full Text Search](#wip-full-text-search)
 <!-- TOC end -->
@@ -354,7 +354,7 @@ API не должно возвращать все поля модели.
 
 Подробнее про CORS заголовки можно прочитать [здесь](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
-# Cache
+# 🚄Cache
 Первым дело задать себе вопросы
 - "зачем нужен кеш, какую проблему он решит?"
 - "можно ли обойтись без кеша?" (например изменив схему СУБД, потюнить настройки, добавить индексы итп)
