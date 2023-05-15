@@ -202,6 +202,9 @@ DOCKER_HOST=“ssh://user@your_vps_domain_or_ip” docker-compose up -d
 * HTTP Basic Auth (простой путь)
 * JSON Web Tokens (посложнее)
 
+Полезные ссылки
+- [Web Authentication Methods Compared](https://testdriven.io/blog/web-authentication-methods/)
+
 **Авторизация** – предоставление определенному лицу прав на выполнение определенных действий.
 Например: пользователь которого забанил администратор не может публиковать комментарии к постам (хотя он прошел аутентификацию на сайте).
 
@@ -369,6 +372,8 @@ API не должно возвращать все поля модели.
   - RAM (в инстансах приложения)
   - СУБД (Redis, Memcached, Dynamo, etcd)
 - Описать метрику для отслеживания эффективности кеша (сache hit rate) и при необходимости изменять размер кеша или изменить стратегию кеширования.
+
+
 # WIP: Full Text Search
 # WIP: Transactions, Locks, Isolation Levels, ACID
 
