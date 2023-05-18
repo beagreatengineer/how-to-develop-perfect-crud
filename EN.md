@@ -257,6 +257,22 @@ Typically, a CORS module is already available in your framework of choice and yo
 
 You can learn more about CORS headers here [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
+# 🚄Cache
+First, try to ask yourself
+- "Why do I need it? What problem is it going to solve?"
+- "Could I do without it?" (for example, by updating the DB schema, adding indices or optimizing etc)
+
+If you are set on implementing caching, then you'll need to:
+- Choose the [cache invalidation strategy](https://codeahoy.com/2017/08/11/caching-strategies-and-how-to-choose-the-right-one/) based on:
+  - app business logic
+  - load profiling (read heavy, write heavy)
+  - available resources (implementation of certain strategies can be really complex)
+- Choose the size and policy for evicting data (because it is impossible to store all of your data in cache). The most popular choice here is Least Recently Used (LRU).
+- Choose the storage:
+  - RAM (in app instances)
+  - DB (Redis, Memcached, Dynamo, etc)
+- Identify the key metrics for measuring the effectiveness (cache hit rate), and be able to change the size or strategy if needed.
+
 # WIP: Transactions, Locks, Isolation Levels, ACID
 # WIP: Cache
 # WIP: Full Text Search
