@@ -46,8 +46,8 @@ If you have a proposal about covering a specific technology here, don't be shy:
 - [📈Logs and Metrics](#logs-and-metrics)
 - [🛡️Security](#%EF%B8%8Fsecurity)
 - [CORS Headers (Cross-Origin Resource Sharing)](#cors-headers-cross-origin-resource-sharing)
+- [Cache](#cache)
 - [WIP: Transactions, Locks, Isolation Levels, ACID](#wip-transactions-locks-isolation-levels-acid)
-- [WIP: Cache](#wip-cache)
 - [WIP: Full Text Search](#wip-full-text-search)
 <!-- TOC end -->
 # Repository
@@ -274,5 +274,4 @@ If you are set on implementing caching, then you'll need to:
 - Identify the key metrics for measuring the effectiveness (cache hit rate), and be able to change the size or strategy if needed.
 
 # WIP: Transactions, Locks, Isolation Levels, ACID
-# WIP: Cache
 # WIP: Full Text Search
