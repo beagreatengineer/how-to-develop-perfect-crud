@@ -214,6 +214,9 @@ DOCKER_HOST=“ssh://user@your_vps_domain_or_ip” docker-compose up -d
 - [Pundit for Ruby](https://github.com/varvet/pundit)
 - [Casbin (Many languages supported)](https://github.com/casbin/casbin)
 
+Additional links:
+- [Difference between RBAC vs. ABAC vs. ACL vs. PBAC vs. DAC](https://www.strongdm.com/blog/rbac-vs-abac)
+
 
 # MVC Explanation
 Цель: разделить обязанности в коде между компонентами. MVC это один из вариантов достижения цели и не требует от разработчика сильной когнитивной нагрузки (по сравнению с другими подходами)
