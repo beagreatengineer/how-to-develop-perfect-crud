@@ -27,7 +27,7 @@ If you have a proposal about covering a specific technology here, don't be shy:
 - [✔️Tests](#%EF%B8%8Ftests)
 - [⚙️Configuration & Infrastructure around Code](#%EF%B8%8Fconfiguration--infrastructure-around-code)
 - [API Design](#api-design)
-- [Authorization & Authentication](#authorization--authentification)
+- [Authorization & Authentication](#authorization--authentication)
 - [MVC Explanation](#mvc-explanation)
   - [Controller](#controller)
   - [Model](#model)
