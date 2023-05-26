@@ -130,6 +130,9 @@ Some examples of libraries:
 - [Pundit for Ruby](https://github.com/varvet/pundit)
 - [Casbin (Many languages supported)](https://github.com/casbin/casbin)
 
+Additional links:
+- [Difference between RBAC vs. ABAC vs. ACL vs. PBAC vs. DAC](https://www.strongdm.com/blog/rbac-vs-abac)
+
 # MVC Explanation
 Goal: split the responsibilities between components. MVC is a type of architecture that allows a developer to build applications without excessive cognitive load (compared to other web architecture types) 
 
@@ -233,9 +236,15 @@ Additional links:
 - [Latency, throughput, and availability: system design interview concepts](https://igotanoffer.com/blogs/tech/latency-throughput-availability-system-design-interview) - A more detailed explanation of why fast processing HTTP requests is so important.
 
 # 📈Logs and Metrics
-- et up Prometheus metrick with data about the state of HTTP API and application runtime. We recommend using settings that collect application performance metrics using RED (Rate Error Duration)](https://www.infoworld.com/article/3638693/the-red-method-a-new-strategy-for-monitoring-microservices.html) and [USE (Utilization Saturation Errors)](https://www.brendangregg.com/usemethod.html) methodologies:
+
+Metrics:
+
+Set up Prometheus metrick with data about the state of HTTP API and application runtime. We recommend using settings that collect application performance metrics using RED (Rate Error Duration)](https://www.infoworld.com/article/3638693/the-red-method-a-new-strategy-for-monitoring-microservices.html) and [USE (Utilization Saturation Errors)](https://www.brendangregg.com/usemethod.html) methodologies:
   - [prometheus, promauto, promhttp for Go](https://prometheus.io/docs/guides/go-application/)
   - [starlette-prometheus for Python](https://github.com/perdy/starlette-prometheus)
+
+
+Logs:
 - [Logs should only be sent to stdout](https://12factor.net/logs)
 - [Logs should have a strict format like JSON](https://coralogix.com/blog/json-logging-why-how-what-tips/)
 
