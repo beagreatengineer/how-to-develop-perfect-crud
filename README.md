@@ -214,6 +214,9 @@ DOCKER_HOST=“ssh://user@your_vps_domain_or_ip” docker-compose up -d
 - [Pundit for Ruby](https://github.com/varvet/pundit)
 - [Casbin (Many languages supported)](https://github.com/casbin/casbin)
 
+Additional links:
+- [Difference between RBAC vs. ABAC vs. ACL vs. PBAC vs. DAC](https://www.strongdm.com/blog/rbac-vs-abac)
+
 
 # MVC Explanation
 Цель: разделить обязанности в коде между компонентами. MVC это один из вариантов достижения цели и не требует от разработчика сильной когнитивной нагрузки (по сравнению с другими подходами)
@@ -333,9 +336,15 @@ API не должно возвращать все поля модели.
 
 
 # 📈Logs and Metrics
+
+
+Metrics:
 - Настроить Prometheus метрики с информацией о состоянии HTTP API и райнтайме приложения. Рекомендуется использовать готовые пакеты, которые собирают метрики о работе приложения по методикам [RED (Rate Error Duration)](https://www.infoworld.com/article/3638693/the-red-method-a-new-strategy-for-monitoring-microservices.html) и [USE (Utilization Saturation Errors)](https://www.brendangregg.com/usemethod.html):
   - [prometheus, promauto, promhttp для Go](https://prometheus.io/docs/guides/go-application/)
   - [starlette-prometheus для Python](https://github.com/perdy/starlette-prometheus)
+
+
+Logs:
 - [Логи должны писаться только в stdout](https://12factor.net/logs)
 - [Логи должны иметь строгий формат, например это может быть JSON](https://coralogix.com/blog/json-logging-why-how-what-tips/)
 
