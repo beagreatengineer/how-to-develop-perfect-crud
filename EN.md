@@ -1,4 +1,3 @@
-# How to develop perfect CRUD
 [<img src="https://img.shields.io/badge/channel-telegram-blue">](https://t.me/careerunderhood) [<img src="https://img.shields.io/badge/message-telegram-blue">](https://t.me/ea_kozlov)
 
 Translations: [EN(you are here)](EN.md), [RU](README.md)
