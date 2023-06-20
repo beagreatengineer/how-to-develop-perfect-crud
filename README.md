@@ -1,7 +1,7 @@
 # How to develop perfect CRUD
 [<img src="https://img.shields.io/badge/channel-telegram-blue">](https://t.me/careerunderhood) [<img src="https://img.shields.io/badge/message-telegram-blue">](https://t.me/ea_kozlov)
 
-Translations: [EN](https://github.com/abstractart/how-to-develop-perfect-crud/blob/main/EN.md), [RU(you are here)](https://github.com/abstractart/how-to-develop-perfect-crud/blob/main/README.md)
+Translations: [EN](EN.md), [RU(you are here)](README.md)
 
 # 🤔 Что это?
 Данная статья - попытка объединить в одном месте хорошие практики, которые полезно знать и применять при разработке бэкэнд приложения. 
