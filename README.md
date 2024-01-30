@@ -193,6 +193,7 @@ DOCKER_HOST=“ssh://user@your_vps_domain_or_ip” docker-compose up -d
 
 Если считаешь что связка REST+JSON не подходит под задачу, или по заданию требуется другой формат, то стоит изучить альтернативы:
 - [SOAP](https://www.w3.org/TR/soap12-part1/)
+- [JSON-RPC](https://www.jsonrpc.org/)
 - [gRPC](https://grpc.io/)
 - [GraphQL](https://graphql.org/)
 
