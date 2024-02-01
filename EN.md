@@ -111,6 +111,7 @@ When writing the configuration for your application, use the 12factor principles
   
 If you think that REST+JSON option is not a great fit for your application design, or your task requires using a different format, it could be beneficial to familiarize yourself with some alternatives:
 - [SOAP](https://www.w3.org/TR/soap12-part1/)
+- [JSON-RPC](https://www.jsonrpc.org/)
 - [gRPC](https://grpc.io/)
 - [GraphQL](https://graphql.org/)
 
