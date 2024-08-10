@@ -55,7 +55,7 @@ Translations: [EN](EN.md), [RU(you are here)](README.md)
 - [🛡️Security](#%EF%B8%8Fsecurity)
 - [CORS Headers (Cross-Origin Resource Sharing)](#cors-headers-cross-origin-resource-sharing)
 - [🚄Cache](#cache)
-- [WIP: Transactions, Locks, Isolation Levels, ACID](#wip-transactions-locks-isolation-levels-acid)
+- [Transactions, Locks, Isolation Levels, ACID](#transactions-locks-isolation-levels-acid)
 - [WIP: Full Text Search](#wip-full-text-search)
 <!-- TOC end -->
 
