@@ -180,6 +180,15 @@ DOCKER_HOST=“ssh://user@your_vps_domain_or_ip” docker-compose up -d
 - [Deploy to Kubernetes](https://docs.docker.com/get-started/kube-deploy/)
 
 
+## Bonus #1: Learn deployment strategies
+Существует несколько способов доставки новых версий приложения. Каждая из них имеет свои плюсы и минусы. Изучите их и выберите наиболее подходящую. Отличный практический репозиторий с объяснениями на примере k8s
+- [Kubernetes deployment strategies explained](https://github.com/ContainerSolutions/k8s-deployment-strategies)
+
+## Bonus #2: Shutdown app gracefully with zero downtime
+Деплой приложения подразумевает что текущие инстансы приложения будут постепенно удаляться и их место займут новые. Чтобы клиент в момент релиза не получил негативный опыт взаимодействия важно перед тем как удалять инстансы терпеливо дожидаться завершения всех клиентских запросов (если речь о HTTP) и не допускать ситуации что в момент деплоя инстанс который завершает свою работу продолжает принимать HTTP запросы.
+
+[Как безопасно завершить работу пода в Kubernetes: разбираемся с graceful shutdown и zero downtime деплоймент](https://habr.com/en/companies/vk/articles/654471/)
+
 # API Design
 * Используй конвенции [REST](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/) как фундамент при именовании путей, типов операций и выборе статусов ответов API  
 * Формат данных: JSON (если не требуется другого)
