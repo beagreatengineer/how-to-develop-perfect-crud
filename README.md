@@ -345,17 +345,13 @@ API не должно возвращать все поля модели.
 - [RabbitMQ и Apache Kafka: что выбрать](https://slurm.io/tpost/phdmogo9y1-rabbitmq-i-apache-kafka-chto-vibrat-i-mo)
 - [Latency, throughput, and availability: system design interview concepts](https://igotanoffer.com/blogs/tech/latency-throughput-availability-system-design-interview) - Подробнее о том, почему так важно чтобы HTTP запросы были быстрыми
 
-
-# 📈Logs and Metrics
-
-
-Metrics:
+# Metrics
 - Настроить Prometheus метрики с информацией о состоянии HTTP API и райнтайме приложения. Рекомендуется использовать готовые пакеты, которые собирают метрики о работе приложения по методикам [RED (Rate Error Duration)](https://www.infoworld.com/article/3638693/the-red-method-a-new-strategy-for-monitoring-microservices.html) и [USE (Utilization Saturation Errors)](https://www.brendangregg.com/usemethod.html):
   - [prometheus, promauto, promhttp для Go](https://prometheus.io/docs/guides/go-application/)
   - [starlette-prometheus для Python](https://github.com/perdy/starlette-prometheus)
 
 
-Logs:
+# Logs
 - [Логи должны писаться только в stdout](https://12factor.net/logs)
 - [Логи должны иметь строгий формат, например это может быть JSON](https://coralogix.com/blog/json-logging-why-how-what-tips/)
 - [Используйте structured logging подход для явного отделения логируемого сообщения от контекста в котором оно произошло](https://stackify.com/what-is-structured-logging-and-why-developers-need-it/)
@@ -401,7 +397,7 @@ Logs:
 Полезные ссылки:
 - [Фича Флаги и управление ими “по-взрослому”: кейс команды СберЗдоровье](https://habr.com/ru/companies/docdoc/articles/742962/)
 - [Open-source feature management solution built for developers.](https://github.com/Unleash/unleash)
-
+- [Flagr is a feature flagging, A/B testing and dynamic configuration microservice](https://github.com/openflagr/flagr)
 
 # Full Text Search
 # Transactions, Locks, Isolation Levels, ACID
