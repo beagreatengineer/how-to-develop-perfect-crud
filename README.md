@@ -289,7 +289,7 @@ P.S. При описании миграций полезно подсматри�
 ## LIST (HTTP GET)
 * Для каждого ресурса в ответе должно присутствовать ID.
 * Ресурсы должны быть отсортированными по какому либо признаку, например по времени создания.
-* API должен поддерживать пагинацию (чтобы не возвращать все сущности из БД за раз) [Разбор вариантов пагинации](https://dev.to/appwrite/this-is-why-you-should-use-cursor-pagination-4nh5)
+* API должен поддерживать пагинацию (чтобы не возвращать все сущности из БД за раз) [Разбор вариантов пагинации](https://dev.to/appwrite/this-is-why-you-should-use-cursor-pagination-4nh5) + [Примеры на PostgreSQL](https://www.citusdata.com/blog/2016/03/30/five-ways-to-paginate/)
 * Количество запросов к БД в рамках запроса должно быть фиксированным (Отсутствует [N+1 проблема](https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem-in-orm-object-relational-mapping))
 
 API не должно возвращать все поля модели.
